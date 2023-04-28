@@ -1,0 +1,26 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "semi": [
+      "error",
+      "never"
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1
+      }
+    ],
+    "quotes": [
+			"error",
+			"single"
+		],
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ]
+  }
+}
