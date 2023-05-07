@@ -11,6 +11,8 @@ interface NumericInputSelectProps {
   maxValue: number
 }
 
+const defaultTime = 2000
+
 export const NumericInputSelect: FC<NumericInputSelectProps> = ({
   placeholder,
   handleOnChange,
@@ -23,9 +25,13 @@ export const NumericInputSelect: FC<NumericInputSelectProps> = ({
     // Convert the current value to a number and increment it
     const newValue = Number(inputValue) + 1
     const newValueString = String(newValue)
+
+    setInputValue(newValueString)
+
     if (newValue <= maxValue) {
-      setInputValue(newValueString)
       handleOnChange(Number(newValueString))
+    } else {
+      setTimeout(() => { setInputAndHandleChange(maxValue) }, defaultTime)
     }
   }
 
@@ -33,23 +39,42 @@ export const NumericInputSelect: FC<NumericInputSelectProps> = ({
     // Convert the current value to a number and decrement it
     const newValue = Number(inputValue) - 1
     const newValueString = String(newValue >= minValue ? newValue : minValue)
+
+    setInputValue(newValueString)
+
     if (newValue >= minValue) {
-      setInputValue(newValueString)
       handleOnChange(Number(newValueString))
+    } else {
+      setTimeout(() => { setInputAndHandleChange(minValue) }, defaultTime)
     }
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value
     const newValueString = newValue.replace(/[^0-9]/g, '') // Remove non-numeric characters
+
+    setInputValue(newValueString)
+
     if (
       newValueString !== '' &&
       Number(newValueString) >= minValue &&
       Number(newValueString) <= maxValue
     ) {
-      setInputValue(newValueString)
       handleOnChange(Number(newValueString))
+    } else {
+      setTimeout(() => {
+        const newValue = Number(newValueString)
+
+        newValue > minValue && setInputAndHandleChange(minValue)
+        newValue > maxValue && setInputAndHandleChange(maxValue)
+        newValueString === '' && setInputAndHandleChange(minValue)
+      }, defaultTime)
     }
+  }
+
+  const setInputAndHandleChange = (value: number) => {
+    setInputValue(String(value))
+    handleOnChange(value)
   }
 
   return (
