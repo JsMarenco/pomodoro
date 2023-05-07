@@ -6,7 +6,7 @@ const apiSuccessMessages = {
     updated: 'Info updated successfully',
   },
   password: {
-    resetLinkSent: "We'll send you a link to reset your password",
+    resetLinkSent: 'We will send you a link to reset your password',
     reset: 'Your password has been reset successfully',
   },
   email: {
