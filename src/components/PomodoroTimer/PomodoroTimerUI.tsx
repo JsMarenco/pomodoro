@@ -24,6 +24,10 @@ interface PomodoroTimerUIProps {
   handleClick: (event: React.MouseEvent<HTMLElement>) => void
   handlePauseTimer: () => void
   handleStartTimer: () => void
+  handleGoToNextInterval: () => void
+
+  currentInterval: number
+  userPomodoroIntervals: number
 }
 
 const iconWrapper = {
@@ -44,6 +48,9 @@ export default function PomodoroTimerUI(props: PomodoroTimerUIProps) {
     handlePauseTimer,
     handleStartTimer,
     isPaused,
+    currentInterval,
+    userPomodoroIntervals,
+    handleGoToNextInterval,
   } = props
 
   return (
@@ -101,6 +108,15 @@ export default function PomodoroTimerUI(props: PomodoroTimerUIProps) {
         lineHeight={0.7}
       >
         {seconds > 9 ? seconds : `0${seconds}`}
+      </Typography>
+
+      <Typography
+        variant="body1"
+        color="text.primary"
+        align="center"
+        fontWeight={300}
+      >
+        {`${currentInterval} | ${userPomodoroIntervals}`}
       </Typography>
 
       <Stack
@@ -164,7 +180,12 @@ export default function PomodoroTimerUI(props: PomodoroTimerUIProps) {
             bgcolor: isPaused ? 'primary.light' : 'secondary.light',
           }}
         >
-          <IconButton size="small" disableRipple>
+          <IconButton
+            size="small"
+            disableRipple
+            onClick={handleGoToNextInterval}
+            disabled={isPaused || currentInterval === userPomodoroIntervals}
+          >
             <SkipNextOutlinedIcon fontSize="large" />
           </IconButton>
         </Box>

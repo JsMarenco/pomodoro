@@ -2,13 +2,23 @@ import { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/app'
-import { pauseTimer, startTimer, tick } from '@/app/slices/pomodoro/personal'
+import {
+  goToNextInterval,
+  pauseTimer,
+  startTimer,
+  tick,
+} from '@/app/slices/pomodoro/personal'
 import PomodoroTimerUI from './PomodoroTimerUI'
 
 export default function PomodoroTimer() {
-  const { minutes, seconds, isPaused, status } = useSelector(
-    (state: RootState) => state.personalPomodoro
-  )
+  const {
+    minutes,
+    seconds,
+    isPaused,
+    status,
+    currentInterval,
+    userPomodoroIntervals,
+  } = useSelector((state: RootState) => state.personalPomodoro)
 
   const dispatch = useDispatch()
   const [anchorElMoreOptions, setAnchorElMoreOptions] =
@@ -43,6 +53,10 @@ export default function PomodoroTimer() {
     dispatch(pauseTimer())
   }
 
+  const handleGoToNextInterval = () => {
+    dispatch(goToNextInterval())
+  }
+
   return (
     <PomodoroTimerUI
       status={status}
@@ -55,6 +69,9 @@ export default function PomodoroTimer() {
       handleClick={handleClick}
       handlePauseTimer={handlePauseTimer}
       handleStartTimer={handleStartTimer}
+      currentInterval={currentInterval}
+      userPomodoroIntervals={userPomodoroIntervals}
+      handleGoToNextInterval={handleGoToNextInterval}
     />
   )
 }
