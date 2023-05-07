@@ -14,11 +14,11 @@ const darkTheme = createTheme({
       main: '#ffffff',
     },
     text: {
-      primary: '#ffffff',
+      primary: '#FFF2F2',
       secondary: '#e5e5e5',
     },
     background: {
-      paper: '#14213d',
+      paper: '#0D0404',
       default: '#000000',
     },
     divider: '#fca311',

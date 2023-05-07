@@ -11,7 +11,7 @@ const lightTheme = createTheme({
       black: '#161a1d',
     },
     primary: {
-      main: '#2C0E37',
+      main: '#FF4C4C',
       light: '#90e0ef',
       contrastText: '#ffffff',
     },
@@ -37,8 +37,8 @@ const lightTheme = createTheme({
       secondary: '#5c5a5a',
     },
     background: {
-      paper: '#ffffff',
-      default: '#ededed',
+      paper: '#ededed',
+      default: '#ffffff',
     },
     divider: '#5c5a5a',
   },

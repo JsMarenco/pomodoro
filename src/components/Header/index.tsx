@@ -5,6 +5,8 @@ import Image from 'next/image'
 import logoLight from '@/assets/logo/logo_light.svg'
 import ToggleTheme from '../Buttons/ToggleTheme'
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
+import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
+import LeaderboardOutlinedIcon from '@mui/icons-material/LeaderboardOutlined'
 
 export default function Header() {
   return (
@@ -20,11 +22,24 @@ export default function Header() {
             <Image src={logoLight.src} alt="" width={50} height={50} />
           </Box>
 
-          <Stack spacing={2} direction='row' alignItems='center' justifyContent='flex-end' >
+          <Stack
+            spacing={2}
+            direction="row"
+            alignItems="center"
+            justifyContent="flex-end"
+          >
+            <IconButton sx={{ color: 'primary.light' }}>
+              <LeaderboardOutlinedIcon />
+            </IconButton>
+
             <ToggleTheme />
 
             <IconButton sx={{ color: 'primary.light' }}>
               <SettingsOutlinedIcon />
+            </IconButton>
+
+            <IconButton sx={{ color: 'primary.light' }}>
+              <ShareOutlinedIcon />
             </IconButton>
           </Stack>
         </Stack>
