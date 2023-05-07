@@ -1,14 +1,17 @@
 import React from 'react'
 
-import { Stack, Typography, Tooltip, IconButton } from '@mui/material'
+import { Stack, Typography, IconButton, Box } from '@mui/material'
 import { MoreOptionsMenu } from '../Menus/MoreOptions'
 import PlayArrowOutlinedIcon from '@mui/icons-material/PlayArrowOutlined'
 import PauseIcon from '@mui/icons-material/Pause'
 import SkipNextOutlinedIcon from '@mui/icons-material/SkipNextOutlined'
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined'
+import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined'
+import { PomodoroStatus } from '@/app/slices/pomodoro/personal'
+import CoffeeMakerOutlinedIcon from '@mui/icons-material/CoffeeMakerOutlined'
 
 interface PomodoroTimerUIProps {
-  status: string
+  status: PomodoroStatus
   isPaused: boolean
 
   minutes: number
@@ -23,11 +26,10 @@ interface PomodoroTimerUIProps {
   handleStartTimer: () => void
 }
 
-const iconStyles = {
-  borderRadius: 2,
-  border: '1px solid',
-  borderColor: 'text.primary',
+const iconWrapper = {
+  borderRadius: 3,
   color: 'text.primary',
+  transition: 'background-color 0.2s ease',
 }
 
 export default function PomodoroTimerUI(props: PomodoroTimerUIProps) {
@@ -45,7 +47,40 @@ export default function PomodoroTimerUI(props: PomodoroTimerUIProps) {
   } = props
 
   return (
-    <Stack spacing={2}>
+    <Stack spacing={3}>
+      <Stack
+        sx={{
+          borderRadius: 6,
+          border: '1px solid',
+          borderColor: 'text.primary',
+          py: 1,
+          width: '100%',
+          maxWidth: '150px',
+          mx: 'auto',
+          bgcolor: isPaused ? 'primary.light' : 'secondary.light',
+        }}
+        spacing={2}
+        direction="row"
+        alignItems="center"
+        justifyContent="center"
+      >
+        {status === 'Focus' ? (
+          <PsychologyOutlinedIcon
+            sx={{ color: 'text.primary' }}
+            fontSize="small"
+          />
+        ) : (
+          <CoffeeMakerOutlinedIcon
+            sx={{ color: 'text.primary' }}
+            fontSize="small"
+          />
+        )}
+
+        <Typography variant="body1" color="text.primary">
+          {status}
+        </Typography>
+      </Stack>
+
       <Typography
         variant="h3"
         color="text.primary"
@@ -79,42 +114,60 @@ export default function PomodoroTimerUI(props: PomodoroTimerUIProps) {
           anchorElMoreOptions={anchorElMoreOptions}
           handleCloseMoreOptions={handleCloseMoreOptions}
         >
-          <Tooltip title="More options" arrow placement="top">
-            <IconButton size="small" onClick={handleClick} sx={iconStyles}>
+          <Box
+            sx={{
+              ...iconWrapper,
+              bgcolor: isPaused ? 'primary.light' : 'secondary.light',
+            }}
+          >
+            <IconButton size="small" onClick={handleClick} disableRipple>
               <MoreHorizOutlinedIcon fontSize="large" />
             </IconButton>
-          </Tooltip>
+          </Box>
         </MoreOptionsMenu>
 
-        {isPaused && (
-          <Tooltip title="Play" arrow placement="top">
+        <Box
+          sx={{
+            ...iconWrapper,
+            bgcolor: isPaused ? 'primary.main' : 'secondary.main',
+            backgroundImage: 'none',
+          }}
+        >
+          {isPaused && (
             <IconButton
               onClick={handleStartTimer}
               size="small"
-              sx={{ ...iconStyles, p: 1.5 }}
+              sx={{ p: 1.5 }}
+              disableFocusRipple
+              disableRipple
             >
               <PlayArrowOutlinedIcon fontSize="large" />
             </IconButton>
-          </Tooltip>
-        )}
+          )}
 
-        {!isPaused && (
-          <Tooltip title="Pause" arrow placement="top">
+          {!isPaused && (
             <IconButton
               onClick={handlePauseTimer}
               size="small"
-              sx={{ ...iconStyles, p: 1.5 }}
+              sx={{ p: 1.5 }}
+              disableFocusRipple
+              disableRipple
             >
               <PauseIcon fontSize="large" />
             </IconButton>
-          </Tooltip>
-        )}
+          )}
+        </Box>
 
-        <Tooltip title="Next" arrow placement="top">
-          <IconButton size="small" sx={iconStyles}>
+        <Box
+          sx={{
+            ...iconWrapper,
+            bgcolor: isPaused ? 'primary.light' : 'secondary.light',
+          }}
+        >
+          <IconButton size="small" disableRipple>
             <SkipNextOutlinedIcon fontSize="large" />
           </IconButton>
-        </Tooltip>
+        </Box>
       </Stack>
     </Stack>
   )
