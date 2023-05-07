@@ -18,7 +18,10 @@ import { SettingItem } from './SettingsItem'
 import CloseIcon from '@mui/icons-material/Close'
 import { pomodoroTimer } from '@/utils/basic/pomodoroTimer'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateFocusTimeDuration } from '@/app/slices/pomodoro/personal'
+import {
+  updateFocusTimeDuration,
+  updatePomodoroIntervals,
+} from '@/app/slices/pomodoro/personal'
 import { RootState } from '@/app'
 import settingsMenuStyles from './styles'
 
@@ -43,7 +46,7 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
   handleCloseSettingsOptions,
 }) => {
   const { handleChangeThemeApp, currentThemeName } = useContext(AppThemeContext)
-  const { userFocusTimeDuration } = useSelector(
+  const { userFocusTimeDuration, userPomodoroIntervals } = useSelector(
     (state: RootState) => state.personalPomodoro
   )
   const dispatch = useDispatch()
@@ -101,6 +104,17 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
                 }
                 minValue={pomodoroTimer.focusTimer.durationRange.min}
                 maxValue={pomodoroTimer.focusTimer.durationRange.max}
+              />
+            </SettingItem>
+
+            <SettingItem label="Pomodoros until long break">
+              <NumericInputSelect
+                placeholder={String(userPomodoroIntervals)}
+                handleOnChange={(newDuration) =>
+                  dispatch(updatePomodoroIntervals(newDuration))
+                }
+                minValue={pomodoroTimer.intervalTimer.durationRange.min}
+                maxValue={pomodoroTimer.intervalTimer.durationRange.max}
               />
             </SettingItem>
           </Stack>
