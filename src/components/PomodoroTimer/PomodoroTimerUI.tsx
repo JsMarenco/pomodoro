@@ -107,7 +107,7 @@ export default function PomodoroTimerUI(props: PomodoroTimerUIProps) {
 
         {isPaused && (
           <Tooltip title="Play" arrow placement="top">
-            <IconButton onClick={handleStartTimer} size="small" sx={iconStyles}>
+            <IconButton onClick={handleStartTimer} size="small" sx={{ ...iconStyles, p: 1.5 }}>
               <PlayArrowOutlinedIcon fontSize="large" />
             </IconButton>
           </Tooltip>
@@ -115,7 +115,7 @@ export default function PomodoroTimerUI(props: PomodoroTimerUIProps) {
 
         {!isPaused && (
           <Tooltip title="Pause" arrow placement="top">
-            <IconButton onClick={handlePauseTimer} size="small" sx={iconStyles}>
+            <IconButton onClick={handlePauseTimer} size="small" sx={{ ...iconStyles, p: 1.5 }}>
               <PauseIcon fontSize="large" />
             </IconButton>
           </Tooltip>
