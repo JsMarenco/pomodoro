@@ -11,6 +11,7 @@ interface PomodoroTimerState {
   // Pomodoro Time
   minutes: number
   seconds: number
+  currentInterval: number
 
   // Pomodoro User Settings
   userFocusTimeDuration: number
@@ -27,6 +28,7 @@ const initialState: PomodoroTimerState = {
   // Pomodoro Time
   minutes: pomodoroTimer.focusTimer.defaultDuration,
   seconds: 0,
+  currentInterval: 1,
 
   // Pomodoro User Settings
   userFocusTimeDuration: pomodoroTimer.focusTimer.defaultDuration,
