@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { pomodoroTimer } from '@/utils/basic/pomodoroTimer'
 
-type PomodoroStatus = 'Pause' | 'Focus' | 'Break' | 'Long break'
+export type PomodoroStatus = 'Pause' | 'Focus' | 'Break' | 'Long break'
 
 interface PomodoroTimerState {
   // Pomodoro State
