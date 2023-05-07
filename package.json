@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier --write {*.ts,src/**/*.{ts,tsx}}",
-    "lint:fix": "eslint --fix src/**/*.{ts,tsx}"
+    "lint:fix": "eslint --fix src/**/*.{ts,tsx}",
+    "format": "npm run lint:fix && npm run prettier"
   },
   "dependencies": {
     "@emotion/react": "11.10.6",

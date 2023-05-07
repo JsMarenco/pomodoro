@@ -31,7 +31,9 @@ export const NumericInputSelect: FC<NumericInputSelectProps> = ({
     if (newValue <= maxValue) {
       handleOnChange(Number(newValueString))
     } else {
-      setTimeout(() => { setInputAndHandleChange(maxValue) }, defaultTime)
+      setTimeout(() => {
+        setInputAndHandleChange(maxValue)
+      }, defaultTime)
     }
   }
 
@@ -45,7 +47,9 @@ export const NumericInputSelect: FC<NumericInputSelectProps> = ({
     if (newValue >= minValue) {
       handleOnChange(Number(newValueString))
     } else {
-      setTimeout(() => { setInputAndHandleChange(minValue) }, defaultTime)
+      setTimeout(() => {
+        setInputAndHandleChange(minValue)
+      }, defaultTime)
     }
   }
 
