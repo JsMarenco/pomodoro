@@ -5,13 +5,18 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 
 interface NumericInputSelectProps {
-  placeholder: string;
-  handleOnChange: (value: number) => void;
+  placeholder: string
+  handleOnChange: (value: number) => void
   minValue: number
   maxValue: number
 }
 
-export const NumericInputSelect: FC<NumericInputSelectProps> = ({ placeholder, handleOnChange, minValue, maxValue }) => {
+export const NumericInputSelect: FC<NumericInputSelectProps> = ({
+  placeholder,
+  handleOnChange,
+  minValue,
+  maxValue,
+}) => {
   const [inputValue, setInputValue] = useState(placeholder)
 
   const incrementValue = () => {
@@ -37,7 +42,11 @@ export const NumericInputSelect: FC<NumericInputSelectProps> = ({ placeholder, h
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value
     const newValueString = newValue.replace(/[^0-9]/g, '') // Remove non-numeric characters
-    if (newValueString !== '' && Number(newValueString) >= minValue && Number(newValueString) <= maxValue) {
+    if (
+      newValueString !== '' &&
+      Number(newValueString) >= minValue &&
+      Number(newValueString) <= maxValue
+    ) {
       setInputValue(newValueString)
       handleOnChange(Number(newValueString))
     }
@@ -88,8 +97,8 @@ export const NumericInputSelect: FC<NumericInputSelectProps> = ({ placeholder, h
         maxWidth: '70px',
         '.MuiInputBase-input': {
           textAlign: 'center',
-          p: 0
-        }
+          p: 0,
+        },
       }}
       onChange={handleChange}
       value={inputValue}

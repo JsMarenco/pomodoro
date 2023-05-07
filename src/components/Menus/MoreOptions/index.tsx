@@ -12,7 +12,6 @@ interface MoreOptionsMenuProps {
   openMoreOptions: boolean
   anchorElMoreOptions: null | HTMLElement
   handleCloseMoreOptions: () => void
-  updateMinutes: (minutes: number) => void
 }
 
 const paperOptions = {
@@ -49,7 +48,6 @@ export const MoreOptionsMenu: FC<MoreOptionsMenuProps> = ({
   openMoreOptions,
   handleCloseMoreOptions,
   anchorElMoreOptions,
-  updateMinutes
 }) => {
   const router = useRouter()
 
@@ -74,7 +72,6 @@ export const MoreOptionsMenu: FC<MoreOptionsMenuProps> = ({
 
       <Menu
         anchorEl={anchorElMoreOptions}
-        id="account-menu"
         open={openMoreOptions}
         onClose={handleCloseMoreOptions}
         PaperProps={paperOptions}
@@ -84,7 +81,6 @@ export const MoreOptionsMenu: FC<MoreOptionsMenuProps> = ({
         <SettingsMenu
           openSettingsOptions={openSettingsOptions}
           handleCloseSettingsOptions={handleCloseSettingsOptions}
-          updateMinutes={updateMinutes}
         >
           <MenuItem onClick={handleSettingsClick}>
             <ListItemIcon>

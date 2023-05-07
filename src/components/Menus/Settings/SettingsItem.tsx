@@ -2,7 +2,10 @@ import { FC, ReactNode } from 'react'
 
 import { Stack, Typography, Box } from '@mui/material'
 
-export const SettingItem: FC<{ children: ReactNode; label: string }> = ({ children, label }) => {
+export const SettingItem: FC<{ children: ReactNode; label: string }> = ({
+  children,
+  label,
+}) => {
   return (
     <Stack
       direction="row"

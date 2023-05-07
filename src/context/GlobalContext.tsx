@@ -8,6 +8,8 @@ import {
 } from './AppMessageContext'
 import appMessages from '@/constants/messages/app'
 import { AppThemeContextProvider } from './AppThemeContext'
+import { Provider } from 'react-redux'
+import { store } from '@/app'
 
 const GlobalContext: FC<{ children: ReactNode }> = ({ children }) => {
   const { handleMessage } = useContext(AppMessageContext)
@@ -32,11 +34,13 @@ const GlobalContext: FC<{ children: ReactNode }> = ({ children }) => {
 
   return (
     <>
-      <SnackbarProvider maxSnack={3} style={{ backgroundColor: 'black' }}>
-        <AppMessageContextProvider>
-          <AppThemeContextProvider>{children}</AppThemeContextProvider>
-        </AppMessageContextProvider>
-      </SnackbarProvider>
+      <Provider store={store}>
+        <SnackbarProvider maxSnack={3} style={{ backgroundColor: 'black' }}>
+          <AppMessageContextProvider>
+            <AppThemeContextProvider>{children}</AppThemeContextProvider>
+          </AppMessageContextProvider>
+        </SnackbarProvider>
+      </Provider>
     </>
   )
 }

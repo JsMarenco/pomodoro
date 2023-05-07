@@ -29,11 +29,19 @@ const usePomodoroTimer = (): PomodoroTimer => {
 
   const [isPaused, setIsPaused] = useState(true)
 
-  const [minutes, setMinutes] = useState(pomodoroTimer.focusTimer.defaultDuration)
+  const [minutes, setMinutes] = useState(
+    pomodoroTimer.focusTimer.defaultDuration
+  )
   const [seconds, setSeconds] = useState(0)
-  const [shortBreakDuration, setShortBreakDuration] = useState(pomodoroTimer.shortBreakTimer.defaultDuration)
-  const [longBreakDuration, setLongBreakDuration] = useState(pomodoroTimer.longBreakTimer.defaultDuration)
-  const [pomodoroIntervals, setPomodoroIntervals] = useState(pomodoroTimer.intervalTimer.defaultDuration)
+  const [shortBreakDuration, setShortBreakDuration] = useState(
+    pomodoroTimer.shortBreakTimer.defaultDuration
+  )
+  const [longBreakDuration, setLongBreakDuration] = useState(
+    pomodoroTimer.longBreakTimer.defaultDuration
+  )
+  const [pomodoroIntervals, setPomodoroIntervals] = useState(
+    pomodoroTimer.intervalTimer.defaultDuration
+  )
   const [status, setStatus] = useState<pomodorStatus>('Pause')
 
   const startTimer = () => {
@@ -112,7 +120,7 @@ const usePomodoroTimer = (): PomodoroTimer => {
     updateLongBreakDuration,
     updatePomodoroIntervals,
 
-    status
+    status,
   }
 }
 

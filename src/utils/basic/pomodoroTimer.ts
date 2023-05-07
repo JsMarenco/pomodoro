@@ -1,9 +1,9 @@
 interface TimerSettings {
-  defaultDuration: number;
+  defaultDuration: number
   durationRange: {
-    min: number;
-    max: number;
-  };
+    min: number
+    max: number
+  }
 }
 
 const focusTimer: TimerSettings = {

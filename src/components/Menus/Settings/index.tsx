@@ -3,17 +3,28 @@ import { ReactNode, FC, useContext, forwardRef } from 'react'
 import { NumericInputSelect } from '@/components/PomodoroTimer/NumericInputSelect'
 import { AppThemeContext } from '@/context/AppThemeContext'
 import { appThemes } from '@/themes'
-import { Dialog, DialogTitle, Stack, Typography, IconButton, DialogContent, Switch, Slide } from '@mui/material'
+import {
+  Dialog,
+  DialogTitle,
+  Stack,
+  Typography,
+  IconButton,
+  DialogContent,
+  Switch,
+  Slide,
+} from '@mui/material'
 import { TransitionProps } from '@mui/material/transitions'
 import { SettingItem } from './SettingsItem'
 import CloseIcon from '@mui/icons-material/Close'
 import { pomodoroTimer } from '@/utils/basic/pomodoroTimer'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateFocusTimeDuration } from '@/app/slices/pomodoro/personal'
+import { RootState } from '@/app'
 
 interface SettingsMenuProps {
   children: ReactNode
   openSettingsOptions: boolean
   handleCloseSettingsOptions: () => void
-  updateMinutes: (minutes: number) => void
 }
 
 const Transition = forwardRef(function Transition(
@@ -29,9 +40,12 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
   children,
   openSettingsOptions,
   handleCloseSettingsOptions,
-  updateMinutes
 }) => {
   const { handleChangeThemeApp, currentThemeName } = useContext(AppThemeContext)
+  const { userFocusTimeDuration } = useSelector(
+    (state: RootState) => state.personalPomodoro
+  )
+  const dispatch = useDispatch()
 
   return (
     <>
@@ -88,8 +102,10 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
 
             <SettingItem label="Focus length">
               <NumericInputSelect
-                placeholder={String(pomodoroTimer.focusTimer.defaultDuration)}
-                handleOnChange={updateMinutes}
+                placeholder={String(userFocusTimeDuration)}
+                handleOnChange={(newDuration) =>
+                  dispatch(updateFocusTimeDuration(newDuration))
+                }
                 minValue={pomodoroTimer.focusTimer.durationRange.min}
                 maxValue={pomodoroTimer.focusTimer.durationRange.max}
               />
