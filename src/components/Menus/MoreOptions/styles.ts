@@ -28,7 +28,7 @@ const wrapper = {
 }
 
 const moreOptionsMenu = {
-  wrapper
+  wrapper,
 }
 
 export default moreOptionsMenu

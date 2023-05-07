@@ -7,7 +7,7 @@ const apiSuccessMessages = {
   },
   password: {
     resetLinkSent:
-      "If your account exists in our database, we'll send you a link to reset your password",
+      'If your account exists in our database, we\'ll send you a link to reset your password',
     reset: 'Your password has been reset successfully',
   },
   email: {

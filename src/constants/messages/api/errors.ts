@@ -45,7 +45,7 @@ const apiErrorMessage = {
     commentNotFound: 'Comment not found',
   },
   friends: {
-    selfFriendRequest: "You can't send a friend request to yourself",
+    selfFriendRequest: 'You can\'t send a friend request to yourself',
     unauthorized: 'You are not authorized to perform this action',
     acceptOwnFriendRequest:
       'You cannot accept a friend request that you have sent',

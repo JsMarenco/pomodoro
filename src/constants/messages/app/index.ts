@@ -23,10 +23,10 @@ const appMessages = {
   },
   friend: {
     noRequestsMessage:
-      "No friend requests yet, but don't worry, they'll be coming in soon!",
+      'No friend requests yet, but don\'t worry, they\'ll be coming in soon!',
     noFriendRequestMessage: 'There is nothing here',
     noConnectionsMessage: 'Be the first, and make new friends',
-    noFriendsMessage: "Don't worry, making friends is always fun.",
+    noFriendsMessage: 'Don\'t worry, making friends is always fun.',
     noMoreFriendsMessage: 'There are no more friends.',
     noPeopleHereMessage:
       'There is no people here. Invite your friends to join!',
