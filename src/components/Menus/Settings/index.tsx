@@ -20,6 +20,7 @@ import { pomodoroTimer } from '@/utils/basic/pomodoroTimer'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   updateFocusTimeDuration,
+  updateLongBreakDuration,
   updatePomodoroIntervals,
   updateShortBreakDuration,
 } from '@/app/slices/pomodoro/personal'
@@ -51,6 +52,7 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
     userFocusTimeDuration,
     userPomodoroIntervals,
     userShortBreakDuration,
+    userLongBreakDuration,
   } = useSelector((state: RootState) => state.personalPomodoro)
   const dispatch = useDispatch()
 
@@ -129,6 +131,17 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
                 }
                 minValue={pomodoroTimer.shortBreakTimer.durationRange.min}
                 maxValue={pomodoroTimer.shortBreakTimer.durationRange.max}
+              />
+            </SettingItem>
+
+            <SettingItem label="Long break length">
+              <NumericInputSelect
+                placeholder={String(userLongBreakDuration)}
+                handleOnChange={(newDuration) =>
+                  dispatch(updateLongBreakDuration(newDuration))
+                }
+                minValue={pomodoroTimer.longBreakTimer.durationRange.min}
+                maxValue={pomodoroTimer.longBreakTimer.durationRange.max}
               />
             </SettingItem>
           </Stack>
