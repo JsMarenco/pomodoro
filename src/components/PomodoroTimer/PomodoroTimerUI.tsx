@@ -45,32 +45,14 @@ export default function PomodoroTimerUI(props: PomodoroTimerUIProps) {
   } = props
 
   return (
-    <Stack>
-      <Typography
-        variant="h6"
-        color="text.primary"
-        align="center"
-        sx={{
-          borderRadius: 6,
-          border: '1px solid',
-          borderColor: 'text.primary',
-          p: 1.5,
-          py: 0.2,
-          mb: 2,
-          maxWidth: '150px',
-          mx: 'auto',
-        }}
-      >
-        {status}
-      </Typography>
-
+    <Stack spacing={2}>
       <Typography
         variant="h3"
         color="text.primary"
         align="center"
         fontWeight={900}
         fontSize={150}
-        lineHeight={0.8}
+        lineHeight={0.7}
       >
         {minutes > 9 ? minutes : `0${minutes}`}
       </Typography>
@@ -81,7 +63,7 @@ export default function PomodoroTimerUI(props: PomodoroTimerUIProps) {
         align="center"
         fontWeight={900}
         fontSize={150}
-        lineHeight={0.8}
+        lineHeight={0.7}
       >
         {seconds > 9 ? seconds : `0${seconds}`}
       </Typography>
@@ -91,7 +73,6 @@ export default function PomodoroTimerUI(props: PomodoroTimerUIProps) {
         alignItems="center"
         justifyContent="center"
         spacing={2}
-        sx={{ mt: 2 }}
       >
         <MoreOptionsMenu
           openMoreOptions={openMoreOptions}
