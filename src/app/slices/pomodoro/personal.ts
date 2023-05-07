@@ -78,7 +78,6 @@ const pomodoroTimerSlice = createSlice({
     },
 
     updateFocusTimeDuration(state, action: PayloadAction<number>) {
-      state.minutes = action.payload
       state.userFocusTimeDuration = action.payload
       state.seconds = 0
     },
