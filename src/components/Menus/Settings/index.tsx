@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   updateFocusTimeDuration,
   updatePomodoroIntervals,
+  updateShortBreakDuration,
 } from '@/app/slices/pomodoro/personal'
 import { RootState } from '@/app'
 import settingsMenuStyles from './styles'
@@ -46,9 +47,11 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
   handleCloseSettingsOptions,
 }) => {
   const { handleChangeThemeApp, currentThemeName } = useContext(AppThemeContext)
-  const { userFocusTimeDuration, userPomodoroIntervals } = useSelector(
-    (state: RootState) => state.personalPomodoro
-  )
+  const {
+    userFocusTimeDuration,
+    userPomodoroIntervals,
+    userShortBreakDuration,
+  } = useSelector((state: RootState) => state.personalPomodoro)
   const dispatch = useDispatch()
 
   return (
@@ -115,6 +118,17 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
                 }
                 minValue={pomodoroTimer.intervalTimer.durationRange.min}
                 maxValue={pomodoroTimer.intervalTimer.durationRange.max}
+              />
+            </SettingItem>
+
+            <SettingItem label="Short break length">
+              <NumericInputSelect
+                placeholder={String(userShortBreakDuration)}
+                handleOnChange={(newDuration) =>
+                  dispatch(updateShortBreakDuration(newDuration))
+                }
+                minValue={pomodoroTimer.shortBreakTimer.durationRange.min}
+                maxValue={pomodoroTimer.shortBreakTimer.durationRange.max}
               />
             </SettingItem>
           </Stack>
