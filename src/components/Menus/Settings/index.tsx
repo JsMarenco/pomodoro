@@ -20,6 +20,7 @@ import { pomodoroTimer } from '@/utils/basic/pomodoroTimer'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateFocusTimeDuration } from '@/app/slices/pomodoro/personal'
 import { RootState } from '@/app'
+import settingsMenuStyles from './styles'
 
 interface SettingsMenuProps {
   children: ReactNode
@@ -56,16 +57,8 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
         TransitionComponent={Transition}
         keepMounted
         onClose={handleCloseSettingsOptions}
-        aria-describedby="alert-dialog-slide-description"
         maxWidth="sm"
-        sx={{
-          '.MuiDialog-paper': {
-            borderRadius: 2,
-            bgcolor: 'background.paper',
-            backgroundImage: 'none',
-            width: '100%',
-          },
-        }}
+        sx={settingsMenuStyles.wrapper}
       >
         <DialogTitle>
           <Stack
@@ -110,24 +103,6 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
                 maxValue={pomodoroTimer.focusTimer.durationRange.max}
               />
             </SettingItem>
-
-            {/* <SettingItem label="Long break length">
-              <NumericInputSelect
-                placeholder={String(pomodoroTimer.longBreakTimer.defaultDuration)}
-                handleOnChange={(value) => console.log(value)}
-                minValue={pomodoroTimer.longBreakTimer.durationRange.min}
-                maxValue={pomodoroTimer.longBreakTimer.durationRange.max}
-              />
-            </SettingItem>
-
-            <SettingItem label="Short break length">
-              <NumericInputSelect
-                placeholder={String(pomodoroTimer.shortBreakTimer.defaultDuration)}
-                handleOnChange={(value) => console.log(value)}
-                minValue={pomodoroTimer.shortBreakTimer.durationRange.min}
-                maxValue={pomodoroTimer.shortBreakTimer.durationRange.max}
-              />
-            </SettingItem> */}
           </Stack>
         </DialogContent>
       </Dialog>
