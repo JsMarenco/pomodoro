@@ -13,7 +13,7 @@ import pomodoroTimerInitialState from '@/utils/states/pomodoroTimer'
 
 const pomodoroTimerSlice = createSlice({
   name: 'pomodoroTimer',
-  initialState: pomodoroTimerInitialState,
+  initialState: pomodoroTimerInitialState(),
   reducers: {
     startTimer: startTimerReducer,
     pauseTimer: pauseTimerReducer,

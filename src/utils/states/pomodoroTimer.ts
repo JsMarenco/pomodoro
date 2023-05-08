@@ -1,37 +1,42 @@
 import { PomodoroTimerState } from '@/ts/interfaces/pomodoroTimerState.interface'
 import { pomodoroTimer } from '../basic/pomodoroTimer'
-import { getFromLocalStorage } from '../basic'
+import { getValueFromLocalStorage } from '../basic'
 import preferenceKeys from '@/constants/preferenceKeys'
 
-const pomodoroTimerInitialState: PomodoroTimerState = {
-  // Pomodoro State
-  isPaused: true,
-  status: 'Pause',
+const pomodoroTimerInitialState = (): PomodoroTimerState => {
+  const focusTimerValue = getValueFromLocalStorage(
+    preferenceKeys.focusTimer.key,
+    pomodoroTimer.focusTimer.defaultDuration
+  )
+  const shortBreakValue = getValueFromLocalStorage(
+    preferenceKeys.shortBreakTimer.key,
+    pomodoroTimer.shortBreakTimer.defaultDuration
+  )
+  const longBreakValue = getValueFromLocalStorage(
+    preferenceKeys.longBreakTimer.key,
+    pomodoroTimer.longBreakTimer.defaultDuration
+  )
+  const intervalValue = getValueFromLocalStorage(
+    preferenceKeys.intervalTimer.key,
+    pomodoroTimer.intervalTimer.defaultDuration
+  )
 
-  // Pomodoro Time
-  minutes:
-    getFromLocalStorage(preferenceKeys.focusTimer.key)?.value ||
-    pomodoroTimer.focusTimer.defaultDuration,
+  return {
+    // Pomodoro State
+    isPaused: true,
+    status: 'Pause',
 
-  seconds: 0,
-  currentInterval: 1,
+    // Pomodoro Time
+    minutes: focusTimerValue,
+    seconds: 0,
+    currentInterval: 1,
 
-  // Pomodoro User Settings
-  userFocusTimeDuration:
-    getFromLocalStorage(preferenceKeys.focusTimer.key)?.value ||
-    pomodoroTimer.focusTimer.defaultDuration,
-
-  userShortBreakDuration:
-    getFromLocalStorage(preferenceKeys.shortBreakTimer.key)?.value ||
-    pomodoroTimer.shortBreakTimer.defaultDuration,
-
-  userLongBreakDuration:
-    getFromLocalStorage(preferenceKeys.longBreakTimer.key)?.value ||
-    pomodoroTimer.longBreakTimer.defaultDuration,
-
-  userPomodoroIntervals:
-    getFromLocalStorage(preferenceKeys.intervalTimer.key)?.value ||
-    pomodoroTimer.intervalTimer.defaultDuration,
+    // Pomodoro User Settings
+    userFocusTimeDuration: focusTimerValue,
+    userShortBreakDuration: shortBreakValue,
+    userLongBreakDuration: longBreakValue,
+    userPomodoroIntervals: intervalValue,
+  }
 }
 
 export default pomodoroTimerInitialState
