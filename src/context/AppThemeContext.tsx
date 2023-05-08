@@ -6,6 +6,8 @@ import { ThemeProvider } from '@mui/material'
 // Current project dependencies
 import { appThemes, darkTheme, lightTheme } from '@/themes'
 import { IATC, ICCP } from '@/ts/interfaces/context'
+import { getFromLocalStorage, saveInLocalStorage } from '@/utils/basic'
+import preferenceKeys from '@/constants/preferenceKeys'
 
 /**
  * Theme Context
@@ -33,6 +35,11 @@ export const AppThemeContextProvider = (props: ICCP) => {
     setCurrentTheme(
       currentThemeName === appThemes.dark ? lightTheme : darkTheme
     )
+
+    const value =
+      currentThemeName === appThemes.dark ? appThemes.light : appThemes.dark
+
+    saveInLocalStorage(preferenceKeys.theme.key, { value })
   }
 
   useEffect(() => {
@@ -47,23 +54,32 @@ export const AppThemeContextProvider = (props: ICCP) => {
     document.body.setAttribute('class', themeClass)
   }, [currentTheme, currentThemeName])
 
-  // detect user mode
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    // Check if a default theme exists in localStorage
+    const storedTheme = getFromLocalStorage(preferenceKeys.theme.key)
 
-    setCurrentThemeName(mediaQuery.matches ? appThemes.light : appThemes.dark)
+    if (storedTheme && storedTheme.value) {
+      setCurrentThemeName(storedTheme.value)
+      setCurrentTheme(
+        storedTheme.value === appThemes.dark ? darkTheme : lightTheme
+      )
+    } else {
+      // Detect user mode
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
 
-    setCurrentTheme(mediaQuery.matches ? lightTheme : darkTheme)
+      setCurrentThemeName(mediaQuery.matches ? appThemes.light : appThemes.dark)
+      setCurrentTheme(mediaQuery.matches ? lightTheme : darkTheme)
 
-    const handleChange = (event: MediaQueryListEvent) => {
-      setCurrentThemeName(event.matches ? appThemes.light : appThemes.dark)
-      setCurrentTheme(event.matches ? lightTheme : darkTheme)
-    }
+      const handleChange = (event: MediaQueryListEvent) => {
+        setCurrentThemeName(event.matches ? appThemes.light : appThemes.dark)
+        setCurrentTheme(event.matches ? lightTheme : darkTheme)
+      }
 
-    mediaQuery.addEventListener('change', handleChange)
+      mediaQuery.addEventListener('change', handleChange)
 
-    return () => {
-      mediaQuery.removeEventListener('change', handleChange)
+      return () => {
+        mediaQuery.removeEventListener('change', handleChange)
+      }
     }
   }, [])
 
