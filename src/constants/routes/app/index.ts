@@ -14,8 +14,8 @@ const appRoutes = {
   },
   auth: {
     login: '/api/auth/login',
-    logout: '/api/auth/logout'
-  }
+    logout: '/api/auth/logout',
+  },
 }
 
 export default appRoutes
