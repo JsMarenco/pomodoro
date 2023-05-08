@@ -26,10 +26,12 @@ const tickReducer: CaseReducer<PomodoroTimerState> = (state) => {
             currentInterval + 1,
             userPomodoroIntervals
           )
+
           state.minutes = userFocusTimeDuration
         } else if (status === 'Focus') {
           state.minutes = userShortBreakDuration
         }
+
         state.status = status === 'Focus' ? 'Break' : 'Focus'
         state.seconds = 0
       } else {
@@ -43,6 +45,18 @@ const tickReducer: CaseReducer<PomodoroTimerState> = (state) => {
     }
   } else {
     state.seconds -= 1
+  }
+
+  if (
+    state.status === 'Long break' &&
+    state.minutes === 0 &&
+    state.seconds === 0
+  ) {
+    state.currentInterval = 1
+    state.status = 'Pause'
+    state.minutes = userFocusTimeDuration
+    state.seconds = 0
+    state.isPaused = true
   }
 }
 
