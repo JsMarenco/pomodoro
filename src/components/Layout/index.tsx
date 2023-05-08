@@ -1,8 +1,6 @@
 import { FC, ReactNode } from 'react'
 
 import { Box, Container } from '@mui/material'
-// import Footer from '../Footer'
-// import Header from '../Header'
 import ScrollTop from '../Buttons/ScrollTop'
 
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {
@@ -15,8 +13,6 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
         position: 'relative',
       }}
     >
-      {/* <Header /> */}
-
       <Box sx={{ flexGrow: 1 }} className="flex items-center">
         <Container maxWidth="lg" sx={{ my: 2 }}>
           {children}
@@ -24,8 +20,6 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
       </Box>
 
       <ScrollTop />
-
-      {/* <Footer /> */}
     </Box>
   )
 }
