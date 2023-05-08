@@ -10,25 +10,7 @@ import updateLongBreakDurationReducer from './reducers/updateLongBreakDuration'
 import updatePomodoroIntervalsReducer from './reducers/updatePomodoroIntervals'
 import resetSettingsReducer from './reducers/resetSettings'
 import tickReducer from './reducers/tick'
-
-export type PomodoroStatus = 'Pause' | 'Focus' | 'Break' | 'Long break'
-
-export interface PomodoroTimerState {
-  // Pomodoro State
-  isPaused: boolean
-  status: PomodoroStatus
-
-  // Pomodoro Time
-  minutes: number
-  seconds: number
-  currentInterval: number
-
-  // Pomodoro User Settings
-  userFocusTimeDuration: number
-  userShortBreakDuration: number
-  userLongBreakDuration: number
-  userPomodoroIntervals: number
-}
+import { PomodoroTimerState } from '@/ts/interfaces/pomodoroTimerState.interface'
 
 const initialState: PomodoroTimerState = {
   // Pomodoro State
