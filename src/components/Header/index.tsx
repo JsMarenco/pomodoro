@@ -8,7 +8,7 @@ export default function Header() {
     <AppBar
       position="relative"
       sx={{
-        bgcolor: 'primary.light'
+        bgcolor: 'primary.light',
       }}
     >
       <Toolbar>
