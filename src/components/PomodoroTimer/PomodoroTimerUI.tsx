@@ -7,8 +7,8 @@ import PauseIcon from '@mui/icons-material/Pause'
 import SkipNextOutlinedIcon from '@mui/icons-material/SkipNextOutlined'
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined'
 import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined'
-import { PomodoroStatus } from '@/app/slices/pomodoro/personal'
 import CoffeeMakerOutlinedIcon from '@mui/icons-material/CoffeeMakerOutlined'
+import { PomodoroStatus } from '@/ts/interfaces/pomodoroTimerState.interface'
 
 interface PomodoroTimerUIProps {
   status: PomodoroStatus
