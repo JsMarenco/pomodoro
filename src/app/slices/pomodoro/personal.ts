@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { pomodoroTimer } from '@/utils/basic/pomodoroTimer'
 import startTimerReducer from './reducers/startTimer'
 import pauseTimerReducer from './reducers/pauseTimer'
 import resetTimerReducer from './reducers/resetTimer'
@@ -10,28 +9,11 @@ import updateLongBreakDurationReducer from './reducers/updateLongBreakDuration'
 import updatePomodoroIntervalsReducer from './reducers/updatePomodoroIntervals'
 import resetSettingsReducer from './reducers/resetSettings'
 import tickReducer from './reducers/tick'
-import { PomodoroTimerState } from '@/ts/interfaces/pomodoroTimerState.interface'
-
-const initialState: PomodoroTimerState = {
-  // Pomodoro State
-  isPaused: true,
-  status: 'Pause',
-
-  // Pomodoro Time
-  minutes: pomodoroTimer.focusTimer.defaultDuration,
-  seconds: 0,
-  currentInterval: 1,
-
-  // Pomodoro User Settings
-  userFocusTimeDuration: pomodoroTimer.focusTimer.defaultDuration,
-  userShortBreakDuration: pomodoroTimer.shortBreakTimer.defaultDuration,
-  userLongBreakDuration: pomodoroTimer.longBreakTimer.defaultDuration,
-  userPomodoroIntervals: pomodoroTimer.intervalTimer.defaultDuration,
-}
+import pomodoroTimerInitialState from '@/utils/states/pomodoroTimer'
 
 const pomodoroTimerSlice = createSlice({
   name: 'pomodoroTimer',
-  initialState,
+  initialState: pomodoroTimerInitialState,
   reducers: {
     startTimer: startTimerReducer,
     pauseTimer: pauseTimerReducer,
