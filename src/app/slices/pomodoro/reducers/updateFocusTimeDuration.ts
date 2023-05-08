@@ -8,7 +8,6 @@ const updateFocusTimeDurationReducer: CaseReducer<
   PayloadAction<number>
 > = (state, action) => {
   state.userFocusTimeDuration = action.payload
-  state.seconds = 0
 
   saveInLocalStorage(preferenceKeys.focusTimer.key, { value: action.payload })
 }
