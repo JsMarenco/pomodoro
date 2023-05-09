@@ -16,6 +16,11 @@ const appRoutes = {
     login: '/api/auth/login',
     logout: '/api/auth/logout',
   },
+  room: {
+    create: '/room/create',
+    join: '/room/join',
+    view: (roomId: string) => `/room/${roomId}`,
+  },
 }
 
 export default appRoutes
