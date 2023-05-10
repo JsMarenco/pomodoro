@@ -18,8 +18,8 @@ const appRoutes = {
   },
   room: {
     create: '/room/create',
-    join: '/room/join',
-    view: (roomId: string) => `/room/${roomId}`,
+    join: (roomId: string) => `/room/join/${roomId}`,
+    view: (roomId: string) => `/room/view/${roomId}`,
   },
 }
 
