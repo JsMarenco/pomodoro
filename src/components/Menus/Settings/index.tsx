@@ -1,4 +1,4 @@
-import { ReactNode, FC, useContext, forwardRef } from 'react'
+import {  FC, useContext, forwardRef } from 'react'
 
 import { NumericInputSelect } from '@/components/PomodoroTimer/NumericInputSelect'
 import { AppThemeContext } from '@/context/AppThemeContext'
