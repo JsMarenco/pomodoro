@@ -126,9 +126,9 @@ export default function PomodoroTimerUI(props: PomodoroTimerUIProps) {
         spacing={2}
       >
         <MoreOptionsMenu
-          openMoreOptions={openMoreOptions}
+          isOpen={openMoreOptions}
           anchorElMoreOptions={anchorElMoreOptions}
-          handleCloseMoreOptions={handleCloseMoreOptions}
+          handleClose={handleCloseMoreOptions}
         >
           <Box
             sx={{
