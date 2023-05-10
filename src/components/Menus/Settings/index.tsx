@@ -26,12 +26,7 @@ import {
 } from '@/app/slices/pomodoro/personal'
 import { RootState } from '@/app'
 import settingsMenuStyles from './styles'
-
-interface SettingsMenuProps {
-  children: ReactNode
-  openSettingsOptions: boolean
-  handleCloseSettingsOptions: () => void
-}
+import { MenuProps } from '@/ts/interfaces/menu'
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -42,10 +37,10 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />
 })
 
-export const SettingsMenu: FC<SettingsMenuProps> = ({
+export const SettingsMenu: FC<MenuProps> = ({
   children,
-  openSettingsOptions,
-  handleCloseSettingsOptions,
+  isOpen,
+  handleClose,
 }) => {
   const { handleChangeThemeApp, currentThemeName } = useContext(AppThemeContext)
   const {
@@ -61,10 +56,10 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
       {children}
 
       <Dialog
-        open={openSettingsOptions}
+        open={isOpen}
         TransitionComponent={Transition}
         keepMounted
-        onClose={handleCloseSettingsOptions}
+        onClose={handleClose}
         maxWidth="sm"
         sx={settingsMenuStyles.wrapper}
       >
@@ -84,7 +79,7 @@ export const SettingsMenu: FC<SettingsMenuProps> = ({
               Settings
             </Typography>
 
-            <IconButton onClick={handleCloseSettingsOptions} size="small">
+            <IconButton onClick={handleClose} size="small">
               <CloseIcon fontSize="small" />
             </IconButton>
           </Stack>
