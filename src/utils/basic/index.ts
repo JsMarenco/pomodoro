@@ -1,3 +1,6 @@
+import appRoutes from '@/constants/routes/app'
+import { v4 as uuidv4 } from 'uuid'
+
 /**
  * Saves the provided object in the browser's local storage using the specified key.
  * @param {string} key - The name under which the object will be saved.
@@ -38,4 +41,26 @@ export const getValueFromLocalStorage = (
 ) => {
   const storedValue = getFromLocalStorage(key)?.value
   return storedValue || defaultValue
+}
+
+/**
+ * Generates a unique invitation link for a room using UUID.
+ * @returns {string} The unique room invitation link.
+ */
+export const generateRoomInvitationLink = (): string => {
+  const roomId = uuidv4()
+
+  return appRoutes.room.join(roomId)
+}
+
+/**
+ * Copy text to clipboard.
+ * @param {string} text - The text to copy.
+ */
+export const copyToClipboard = (text: string) => {
+  try {
+    navigator.clipboard.writeText(text)
+  } catch (err) {
+    console.error('Failed to copy text to clipboard:', err)
+  }
 }
