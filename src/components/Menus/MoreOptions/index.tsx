@@ -1,37 +1,30 @@
-import { ReactNode, FC, useState } from 'react'
+import { FC } from 'react'
 
 import { Settings } from '@mui/icons-material'
 import { Menu, MenuItem, ListItemIcon } from '@mui/material'
 import { SettingsMenu } from '../Settings'
 import moreOptionsMenu from './styles'
+import useMenu from '@/hooks/general/useMenu'
+import { MenuProps } from '@/ts/interfaces/menu'
 
-interface MoreOptionsMenuProps {
-  children: ReactNode
-  openMoreOptions: boolean
+interface MoreOptionsMenuProps extends MenuProps {
   anchorElMoreOptions: null | HTMLElement
-  handleCloseMoreOptions: () => void
 }
 
 export const MoreOptionsMenu: FC<MoreOptionsMenuProps> = ({
   children,
-  openMoreOptions,
-  handleCloseMoreOptions,
+  isOpen,
+  handleClose,
   anchorElMoreOptions,
 }) => {
-  const [openSettingsOptions, setOpenSettingsOptions] = useState(false)
+  const settingMenu = useMenu()
+  const createRoomMenu = useMenu()
 
-  const handleCloseSettingsOptions = () => {
-    setOpenSettingsOptions(false)
-  }
-
-  const handleOpenSettingsOptions = () => {
-    setOpenSettingsOptions(true)
-  }
-
-  const handleSettingsClick = (event: React.MouseEvent<HTMLElement>) => {
-    event.stopPropagation() // Detener la propagación del evento para evitar que se cierre el menú de opciones adicionales
-    handleOpenSettingsOptions()
-  }
+  const {
+    isOpen: isSettingsOptionsOpen,
+    handleClose: closeSettingsOptions,
+    handleClick: handleSettingsOptionsClick,
+  } = settingMenu
 
   return (
     <>
@@ -39,17 +32,17 @@ export const MoreOptionsMenu: FC<MoreOptionsMenuProps> = ({
 
       <Menu
         anchorEl={anchorElMoreOptions}
-        open={openMoreOptions}
-        onClose={handleCloseMoreOptions}
+        open={isOpen}
+        onClose={handleClose}
         PaperProps={moreOptionsMenu.wrapper}
         transformOrigin={{ horizontal: 'left', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'left', vertical: -60 }}
+        anchorOrigin={{ horizontal: 'left', vertical: -100 }}
       >
         <SettingsMenu
-          openSettingsOptions={openSettingsOptions}
-          handleCloseSettingsOptions={handleCloseSettingsOptions}
+          isOpen={isSettingsOptionsOpen}
+          handleClose={closeSettingsOptions}
         >
-          <MenuItem onClick={handleSettingsClick}>
+          <MenuItem onClick={handleSettingsOptionsClick}>
             <ListItemIcon>
               <Settings fontSize="small" />
             </ListItemIcon>
