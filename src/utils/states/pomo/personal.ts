@@ -40,7 +40,7 @@ const pomodoroUserInitialState = (): PomodoroTimerState => {
     pomodoroIntervals: intervalValue,
 
     // Room Info
-    isRoom: false
+    isRoom: false,
   }
 }
 

@@ -40,7 +40,10 @@ const pomodoroRoomInitialState = (): PomodoroTimerState => {
     pomodoroIntervals: intervalValue,
 
     // Room Info
-    isRoom: true
+    isRoom: true,
+
+    // Room participants
+    participants: 1,
   }
 }
 
