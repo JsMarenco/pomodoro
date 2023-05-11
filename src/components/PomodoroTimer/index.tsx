@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/app'
@@ -6,24 +6,35 @@ import {
   goToNextInterval,
   pauseTimer,
   startTimer,
+  switchToRoomMode,
+  switchToSingleMode,
   tick,
 } from '@/app/slices/pomodoro/personal'
 import PomodoroTimerUI from './PomodoroTimerUI'
+import { useRouter } from 'next/router'
+import appRoutes from '@/constants/routes/app'
 
-export default function PomodoroTimer() {
+interface PomodoroTimerProps {
+  isPrivateRoom?: boolean
+}
+
+const PomodoroTimer: FC<PomodoroTimerProps> = ({ isPrivateRoom = false }) => {
   const {
     minutes,
     seconds,
     isPaused,
     status,
     currentInterval,
-    userPomodoroIntervals,
+    pomodoroIntervals,
+    isRoom,
+    participants,
   } = useSelector((state: RootState) => state.personalPomodoro)
 
   const dispatch = useDispatch()
   const [anchorElMoreOptions, setAnchorElMoreOptions] =
     useState<null | HTMLElement>(null)
   const openMoreOptions = Boolean(anchorElMoreOptions)
+  const router = useRouter()
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElMoreOptions(event.currentTarget)
@@ -45,6 +56,16 @@ export default function PomodoroTimer() {
     }
   }, [isPaused, dispatch])
 
+  useEffect(() => {
+    if (!isRoom && router.pathname !== '/') {
+      dispatch(switchToRoomMode())
+    }
+
+    if (isRoom && router.pathname === '/') {
+      dispatch(switchToSingleMode())
+    }
+  }, [dispatch, isRoom, router.pathname])
+
   const handleStartTimer = () => {
     dispatch(startTimer())
   }
@@ -55,6 +76,10 @@ export default function PomodoroTimer() {
 
   const handleGoToNextInterval = () => {
     dispatch(goToNextInterval())
+  }
+
+  const handleLeftRoom = async () => {
+    router.push(appRoutes.home)
   }
 
   return (
@@ -70,8 +95,13 @@ export default function PomodoroTimer() {
       handlePauseTimer={handlePauseTimer}
       handleStartTimer={handleStartTimer}
       currentInterval={currentInterval}
-      userPomodoroIntervals={userPomodoroIntervals}
+      pomodoroIntervals={pomodoroIntervals}
       handleGoToNextInterval={handleGoToNextInterval}
+      isRoom={isPrivateRoom}
+      roomParticipants={participants || 1}
+      handleLeftRoom={handleLeftRoom}
     />
   )
 }
+
+export default PomodoroTimer
