@@ -1,4 +1,4 @@
-import {  FC, useContext, forwardRef } from 'react'
+import { FC, useContext, forwardRef } from 'react'
 
 import { NumericInputSelect } from '@/components/PomodoroTimer/NumericInputSelect'
 import { AppThemeContext } from '@/context/AppThemeContext'
@@ -25,7 +25,7 @@ import {
   updateShortBreakDuration,
 } from '@/app/slices/pomodoro/personal'
 import { RootState } from '@/app'
-import settingsMenuStyles from './styles'
+import menuStyles from '../styles'
 import { MenuProps } from '@/ts/interfaces/menu'
 
 const Transition = forwardRef(function Transition(
@@ -44,10 +44,10 @@ export const SettingsMenu: FC<MenuProps> = ({
 }) => {
   const { handleChangeThemeApp, currentThemeName } = useContext(AppThemeContext)
   const {
-    userFocusTimeDuration,
-    userPomodoroIntervals,
-    userShortBreakDuration,
-    userLongBreakDuration,
+    focusTimeDuration,
+    pomodoroIntervals,
+    shortBreakDuration,
+    longBreakDuration,
   } = useSelector((state: RootState) => state.personalPomodoro)
   const dispatch = useDispatch()
 
@@ -61,7 +61,7 @@ export const SettingsMenu: FC<MenuProps> = ({
         keepMounted
         onClose={handleClose}
         maxWidth="sm"
-        sx={settingsMenuStyles.wrapper}
+        sx={menuStyles.wrapper}
       >
         <DialogTitle>
           <Stack
@@ -98,7 +98,7 @@ export const SettingsMenu: FC<MenuProps> = ({
 
             <SettingItem label="Focus length">
               <NumericInputSelect
-                placeholder={String(userFocusTimeDuration)}
+                placeholder={String(focusTimeDuration)}
                 handleOnChange={(newDuration) =>
                   dispatch(updateFocusTimeDuration(newDuration))
                 }
@@ -109,7 +109,7 @@ export const SettingsMenu: FC<MenuProps> = ({
 
             <SettingItem label="Pomodoros until long break">
               <NumericInputSelect
-                placeholder={String(userPomodoroIntervals)}
+                placeholder={String(pomodoroIntervals)}
                 handleOnChange={(newDuration) =>
                   dispatch(updatePomodoroIntervals(newDuration))
                 }
@@ -120,7 +120,7 @@ export const SettingsMenu: FC<MenuProps> = ({
 
             <SettingItem label="Short break length">
               <NumericInputSelect
-                placeholder={String(userShortBreakDuration)}
+                placeholder={String(shortBreakDuration)}
                 handleOnChange={(newDuration) =>
                   dispatch(updateShortBreakDuration(newDuration))
                 }
@@ -131,7 +131,7 @@ export const SettingsMenu: FC<MenuProps> = ({
 
             <SettingItem label="Long break length">
               <NumericInputSelect
-                placeholder={String(userLongBreakDuration)}
+                placeholder={String(longBreakDuration)}
                 handleOnChange={(newDuration) =>
                   dispatch(updateLongBreakDuration(newDuration))
                 }
