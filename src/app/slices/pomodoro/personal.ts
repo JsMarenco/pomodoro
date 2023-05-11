@@ -13,6 +13,7 @@ import pomodoroUserInitialState from '@/utils/states/pomo/personal'
 import createRoomReducer from './reducers/createRoom'
 import switchToRoomModeReducer from './reducers/switchToRoomMode'
 import switchToSingleModeReducer from './reducers/switchToSingleMode'
+import updateRoomHostReducer from './reducers/updateRoomHost'
 
 const pomodoroTimerSlice = createSlice({
   name: 'pomodoroTimer',
@@ -31,6 +32,7 @@ const pomodoroTimerSlice = createSlice({
     createRoom: createRoomReducer,
     switchToRoomMode: switchToRoomModeReducer,
     switchToSingleMode: switchToSingleModeReducer,
+    updateRoomHost: updateRoomHostReducer,
   },
 })
 
@@ -47,6 +49,7 @@ export const {
   switchToRoomMode,
   switchToSingleMode,
   createRoom,
+  updateRoomHost,
 } = pomodoroTimerSlice.actions
 
 export default pomodoroTimerSlice.reducer
