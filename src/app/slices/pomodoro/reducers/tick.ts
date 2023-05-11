@@ -1,5 +1,5 @@
 import { CaseReducer } from '@reduxjs/toolkit'
-import { PomodoroTimerState } from '@/ts/interfaces/pomodoroTimerState.interface'
+import { PomodoroTimerState } from '@/ts/interfaces/states/pomodoro'
 
 const tickReducer: CaseReducer<PomodoroTimerState> = (state) => {
   const {
@@ -7,11 +7,11 @@ const tickReducer: CaseReducer<PomodoroTimerState> = (state) => {
     seconds,
     minutes,
     currentInterval,
-    userPomodoroIntervals,
+    pomodoroIntervals,
     status,
-    userFocusTimeDuration,
-    userShortBreakDuration,
-    userLongBreakDuration,
+    focusTimeDuration,
+    shortBreakDuration,
+    longBreakDuration,
   } = state
 
   if (isPaused) {
@@ -20,23 +20,23 @@ const tickReducer: CaseReducer<PomodoroTimerState> = (state) => {
 
   if (seconds === 0) {
     if (minutes === 0) {
-      if (currentInterval < userPomodoroIntervals) {
+      if (currentInterval < pomodoroIntervals) {
         if (status === 'Break') {
           state.currentInterval = Math.min(
             currentInterval + 1,
-            userPomodoroIntervals
+            pomodoroIntervals
           )
 
-          state.minutes = userFocusTimeDuration
+          state.minutes = focusTimeDuration
         } else if (status === 'Focus') {
-          state.minutes = userShortBreakDuration
+          state.minutes = shortBreakDuration
         }
 
         state.status = status === 'Focus' ? 'Break' : 'Focus'
         state.seconds = 0
       } else {
         state.status = 'Long break'
-        state.minutes = userLongBreakDuration
+        state.minutes = longBreakDuration
         state.seconds = 0
       }
     } else {
@@ -54,7 +54,7 @@ const tickReducer: CaseReducer<PomodoroTimerState> = (state) => {
   ) {
     state.currentInterval = 1
     state.status = 'Pause'
-    state.minutes = userFocusTimeDuration
+    state.minutes = focusTimeDuration
     state.seconds = 0
     state.isPaused = true
   }

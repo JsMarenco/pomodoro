@@ -1,5 +1,5 @@
 import { CaseReducer } from '@reduxjs/toolkit'
-import { PomodoroTimerState } from '@/ts/interfaces/pomodoroTimerState.interface'
+import { PomodoroTimerState } from '@/ts/interfaces/states/pomodoro'
 import { pomodoroTimer } from '@/utils/basic/pomodoroTimer'
 
 const resetSettingsReducer: CaseReducer<PomodoroTimerState> = (state) => {
@@ -9,10 +9,10 @@ const resetSettingsReducer: CaseReducer<PomodoroTimerState> = (state) => {
   state.minutes = pomodoroTimer.focusTimer.defaultDuration
   state.seconds = 0
 
-  state.userFocusTimeDuration = pomodoroTimer.focusTimer.defaultDuration
-  state.userShortBreakDuration = pomodoroTimer.shortBreakTimer.defaultDuration
-  state.userLongBreakDuration = pomodoroTimer.longBreakTimer.defaultDuration
-  state.userPomodoroIntervals = pomodoroTimer.intervalTimer.defaultDuration
+  state.focusTimeDuration = pomodoroTimer.focusTimer.defaultDuration
+  state.shortBreakDuration = pomodoroTimer.shortBreakTimer.defaultDuration
+  state.longBreakDuration = pomodoroTimer.longBreakTimer.defaultDuration
+  state.pomodoroIntervals = pomodoroTimer.intervalTimer.defaultDuration
 }
 
 export default resetSettingsReducer

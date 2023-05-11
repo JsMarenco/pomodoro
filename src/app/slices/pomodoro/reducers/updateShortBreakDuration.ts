@@ -1,5 +1,5 @@
 import { CaseReducer, PayloadAction } from '@reduxjs/toolkit'
-import { PomodoroTimerState } from '@/ts/interfaces/pomodoroTimerState.interface'
+import { PomodoroTimerState } from '@/ts/interfaces/states/pomodoro'
 import preferenceKeys from '@/constants/preferenceKeys'
 import { saveInLocalStorage } from '@/utils/basic'
 
@@ -7,9 +7,13 @@ const updateShortBreakDurationReducer: CaseReducer<
   PomodoroTimerState,
   PayloadAction<number>
 > = (state, action) => {
-  state.userShortBreakDuration = action.payload
+  state.shortBreakDuration = action.payload
 
-  saveInLocalStorage(preferenceKeys.shortBreakTimer.key, {
+  const { userPreferenceKeys, roomPreferenceKeys } = preferenceKeys
+
+  const preference = state.isRoom ? roomPreferenceKeys : userPreferenceKeys
+
+  saveInLocalStorage(preference.shortBreakTimer.key, {
     value: action.payload,
   })
 }
