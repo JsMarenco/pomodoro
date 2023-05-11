@@ -9,11 +9,14 @@ import updateLongBreakDurationReducer from './reducers/updateLongBreakDuration'
 import updatePomodoroIntervalsReducer from './reducers/updatePomodoroIntervals'
 import resetSettingsReducer from './reducers/resetSettings'
 import tickReducer from './reducers/tick'
-import pomodoroTimerInitialState from '@/utils/states/pomodoroTimer'
+import pomodoroUserInitialState from '@/utils/states/pomo/personal'
+import createRoomReducer from './reducers/createRoom'
+import switchToRoomModeReducer from './reducers/switchToRoomMode'
+import switchToSingleModeReducer from './reducers/switchToSingleMode'
 
 const pomodoroTimerSlice = createSlice({
   name: 'pomodoroTimer',
-  initialState: pomodoroTimerInitialState(),
+  initialState: pomodoroUserInitialState(),
   reducers: {
     startTimer: startTimerReducer,
     pauseTimer: pauseTimerReducer,
@@ -25,6 +28,9 @@ const pomodoroTimerSlice = createSlice({
     updatePomodoroIntervals: updatePomodoroIntervalsReducer,
     resetSettings: resetSettingsReducer,
     tick: tickReducer,
+    createRoom: createRoomReducer,
+    switchToRoomMode: switchToRoomModeReducer,
+    switchToSingleMode: switchToSingleModeReducer,
   },
 })
 
@@ -38,6 +44,9 @@ export const {
   updatePomodoroIntervals,
   goToNextInterval,
   tick,
+  switchToRoomMode,
+  switchToSingleMode,
+  createRoom,
 } = pomodoroTimerSlice.actions
 
 export default pomodoroTimerSlice.reducer
