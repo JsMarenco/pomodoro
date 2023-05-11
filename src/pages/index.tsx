@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
 import PomodoroTimer from '@/components/PomodoroTimer'
-import Layout from '@/components/Layout'
 import appTitles from '@/constants/titles'
 import useChangePageTitle from '@/hooks/general/useChangePageTitle'
 import AppLoader from '@/components/AppLoader'
@@ -18,10 +17,10 @@ export default function Home() {
   }, [])
 
   return (
-    <Layout>
+    <>
       {loading && <AppLoader />}
 
       {!loading && <PomodoroTimer />}
-    </Layout>
+    </>
   )
 }
