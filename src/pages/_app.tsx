@@ -5,11 +5,14 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import GlobalContext from '@/context/GlobalContext'
+import Layout from '@/components/Layout'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <GlobalContext>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </GlobalContext>
   )
 }
