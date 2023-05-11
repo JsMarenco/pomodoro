@@ -21,6 +21,11 @@ const appRoutes = {
     join: (roomId: string) => `/room/join/${roomId}`,
     view: (roomId: string) => `/room/view/${roomId}`,
   },
+  roomApi: {
+    create: '/api/room/create',
+    join: (roomId: string) => `/api/room/join/${roomId}`,
+    view: (roomId: string) => `/api/room/view/${roomId}`,
+  },
 }
 
 export default appRoutes
