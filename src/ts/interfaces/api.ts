@@ -1,7 +1,7 @@
 /**
  * Global Api Response
  */
-export default interface GlobalApiResponse {
+export interface GlobalApiResponse {
   success: boolean
   message: string
   status: number
