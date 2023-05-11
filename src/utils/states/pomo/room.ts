@@ -1,7 +1,7 @@
 import preferenceKeys from '@/constants/preferenceKeys'
-import { PomodoroTimerState } from '@/ts/interfaces/pomodoroTimerState.interface'
 import { getValueFromLocalStorage } from '@/utils/basic'
 import { pomodoroTimer } from '@/utils/basic/pomodoroTimer'
+import { PomodoroTimerState } from '@/ts/interfaces/states/pomodoro'
 
 const pomodoroRoomInitialState = (): PomodoroTimerState => {
   const room = preferenceKeys.roomPreferenceKeys
@@ -38,6 +38,9 @@ const pomodoroRoomInitialState = (): PomodoroTimerState => {
     shortBreakDuration: shortBreakValue,
     longBreakDuration: longBreakValue,
     pomodoroIntervals: intervalValue,
+
+    // Room Info
+    isRoom: true
   }
 }
 
