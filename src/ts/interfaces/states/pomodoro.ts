@@ -1,6 +1,24 @@
 export type PomodoroStatus = 'Pause' | 'Focus' | 'Break' | 'Long break'
 
-export interface PomodoroTimerState {
+export interface Room {
+  // Room info
+  name: string
+  description?: string
+
+  // Participants
+  participants: number
+
+  // Link and alias
+  link: string
+  linkAlias: string
+
+  // Host
+  host: {
+    fullname: string
+  }
+}
+
+export interface PomodoroTimerState extends Partial<Room> {
   // Pomodoro State
   isPaused: boolean
   status: PomodoroStatus
