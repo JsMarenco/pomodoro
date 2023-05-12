@@ -6,10 +6,14 @@ import { SettingsMenu } from '../Settings'
 import moreOptionsMenu from './styles'
 import useMenu from '@/hooks/general/useMenu'
 import { MenuProps } from '@/ts/interfaces/menu'
+import PersonIcon from '@mui/icons-material/Person'
 
 interface MoreOptionsMenuProps extends MenuProps {
   anchorElMoreOptions: null | HTMLElement
+  isRoom: boolean
 }
+
+const devGitHubUrl = 'https://github.com/JsMarenco'
 
 export const MoreOptionsMenu: FC<MoreOptionsMenuProps> = ({
   children,
@@ -18,7 +22,6 @@ export const MoreOptionsMenu: FC<MoreOptionsMenuProps> = ({
   anchorElMoreOptions,
 }) => {
   const settingMenu = useMenu()
-  const createRoomMenu = useMenu()
 
   const {
     isOpen: isSettingsOptionsOpen,
@@ -49,6 +52,13 @@ export const MoreOptionsMenu: FC<MoreOptionsMenuProps> = ({
             Settings
           </MenuItem>
         </SettingsMenu>
+
+        <MenuItem onClick={() => window.open(devGitHubUrl, '_blank')}>
+          <ListItemIcon>
+            <PersonIcon fontSize="small" />
+          </ListItemIcon>
+          Developer
+        </MenuItem>
       </Menu>
     </>
   )
