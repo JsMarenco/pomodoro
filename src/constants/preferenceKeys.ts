@@ -11,6 +11,9 @@ const userPreferenceKeys = {
   intervalTimer: {
     key: 'userPreference_intervalTimer',
   },
+  enableSounds: {
+    key: 'userPreference_enableSounds',
+  },
 }
 
 const roomPreferenceKeys = {
@@ -25,6 +28,9 @@ const roomPreferenceKeys = {
   },
   intervalTimer: {
     key: 'roomPreference_intervalTimer',
+  },
+  enableSounds: {
+    key: 'roomPreference_enableSounds',
   },
 }
 
