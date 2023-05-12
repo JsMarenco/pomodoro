@@ -15,10 +15,10 @@ import {
 } from '@mui/material'
 import { TransitionProps } from '@mui/material/transitions'
 import { SettingItem } from './SettingsItem'
-import CloseIcon from '@mui/icons-material/Close'
 import { pomodoroTimer } from '@/utils/basic/pomodoroTimer'
 import { useDispatch, useSelector } from 'react-redux'
 import {
+  switchToSilenceMode,
   updateFocusTimeDuration,
   updateLongBreakDuration,
   updatePomodoroIntervals,
@@ -27,6 +27,7 @@ import {
 import { RootState } from '@/app'
 import menuStyles from '../styles'
 import { MenuProps } from '@/ts/interfaces/menu'
+import DialogTitleMenu from '@/components/Custom/DialogTitleMenu'
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -48,6 +49,7 @@ export const SettingsMenu: FC<MenuProps> = ({
     pomodoroIntervals,
     shortBreakDuration,
     longBreakDuration,
+    soundsEnabled,
   } = useSelector((state: RootState) => state.personalPomodoro)
   const dispatch = useDispatch()
 
@@ -63,36 +65,20 @@ export const SettingsMenu: FC<MenuProps> = ({
         maxWidth="sm"
         sx={menuStyles.wrapper}
       >
-        <DialogTitle>
-          <Stack
-            direction="row"
-            spacing={2}
-            justifyContent="space-between"
-            alignItems="center"
-            sx={{ width: '100%' }}
-          >
-            <Typography
-              variant="subtitle1"
-              color="text.primary"
-              fontWeight={400}
-            >
-              Settings
-            </Typography>
-
-            <IconButton onClick={handleClose} size="small">
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </Stack>
-        </DialogTitle>
+        <DialogTitleMenu
+          text='Settings'
+          handleClose={handleClose}
+        />
 
         <DialogContent>
           <Stack spacing={1}>
             <SettingItem label="Dark Mode">
               <Switch
-                defaultChecked={
-                  currentThemeName === appThemes.dark ? true : false
-                }
+                checked={currentThemeName === appThemes.dark ? true : false}
                 onClick={handleChangeThemeApp}
+                color={
+                  currentThemeName === appThemes.dark ? 'primary' : 'secondary'
+                }
               />
             </SettingItem>
 
@@ -137,6 +123,16 @@ export const SettingsMenu: FC<MenuProps> = ({
                 }
                 minValue={pomodoroTimer.longBreakTimer.durationRange.min}
                 maxValue={pomodoroTimer.longBreakTimer.durationRange.max}
+              />
+            </SettingItem>
+
+            <SettingItem label="Sound">
+              <Switch
+                checked={soundsEnabled}
+                onClick={() => dispatch(switchToSilenceMode())}
+                color={
+                  currentThemeName === appThemes.dark ? 'primary' : 'secondary'
+                }
               />
             </SettingItem>
           </Stack>
