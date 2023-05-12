@@ -34,10 +34,7 @@ const pomodoroRoomInitialState = (): PomodoroTimerState => {
     pomodoroTimer.intervalTimer.defaultDuration
   )
 
-  const soundsEnabled = getValueFromLocalStorage(
-    room.enableSounds.key,
-    true
-  )
+  const soundsEnabled = getValueFromLocalStorage(room.enableSounds.key, true)
 
   return {
     // Pomodoro State
