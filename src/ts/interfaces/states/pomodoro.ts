@@ -36,4 +36,7 @@ export interface PomodoroTimerState extends Partial<Room> {
 
   // Room Info
   isRoom: boolean
+
+  // Sounds
+  soundsEnabled: boolean
 }
