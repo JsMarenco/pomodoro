@@ -10,7 +10,6 @@ import appMessages from '@/constants/messages/app'
 import { AppThemeContextProvider } from './AppThemeContext'
 import { Provider } from 'react-redux'
 import { store } from '@/app'
-import { UserProvider } from '@auth0/nextjs-auth0/client'
 
 const GlobalContext: FC<{ children: ReactNode }> = ({ children }) => {
   const { handleMessage } = useContext(AppMessageContext)
@@ -38,9 +37,7 @@ const GlobalContext: FC<{ children: ReactNode }> = ({ children }) => {
       <Provider store={store}>
         <SnackbarProvider maxSnack={3} style={{ backgroundColor: 'black' }}>
           <AppMessageContextProvider>
-            <UserProvider>
-              <AppThemeContextProvider>{children}</AppThemeContextProvider>
-            </UserProvider>
+            <AppThemeContextProvider>{children}</AppThemeContextProvider>
           </AppMessageContextProvider>
         </SnackbarProvider>
       </Provider>
