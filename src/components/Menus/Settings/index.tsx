@@ -65,10 +65,7 @@ export const SettingsMenu: FC<MenuProps> = ({
         maxWidth="sm"
         sx={menuStyles.wrapper}
       >
-        <DialogTitleMenu
-          text='Settings'
-          handleClose={handleClose}
-        />
+        <DialogTitleMenu text="Settings" handleClose={handleClose} />
 
         <DialogContent>
           <Stack spacing={1}>
