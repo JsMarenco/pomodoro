@@ -8,20 +8,37 @@ import { appThemes, darkTheme, lightTheme } from '@/themes'
 import { IATC, ICCP } from '@/ts/interfaces/context'
 import { getFromLocalStorage, saveInLocalStorage } from '@/utils/basic'
 import preferenceKeys from '@/constants/preferenceKeys'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/app'
 
-/**
- * Theme Context
- */
 export const AppThemeContext = createContext<IATC>({} as IATC)
 
-/**
- * Mui Theme
- * @param props React Node
- * @returns Mui Theme Context
- */
 export const AppThemeContextProvider = (props: ICCP) => {
   const [currentThemeName, setCurrentThemeName] = useState(appThemes.light)
   const [currentTheme, setCurrentTheme] = useState(lightTheme)
+  const { backgroundPhoto, isRoom } = useSelector(
+    (state: RootState) => state.personalPomodoro
+  )
+
+  const setBackgroundFromLocalStorage = () => {
+    const { userPreferenceKeys, roomPreferenceKeys } = preferenceKeys
+
+    let url: string = isRoom
+      ? getFromLocalStorage(roomPreferenceKeys.backgroundPhoto.key)?.value
+      : getFromLocalStorage(userPreferenceKeys.backgroundPhoto.key)?.value
+
+    if (url) {
+      document.body.style.backgroundImage = `url(${url})`
+      document.body.style.backgroundPosition = 'center'
+      document.body.style.backgroundSize = 'cover'
+    }
+  }
+
+  const handleChangeBgImage = (url: string) => {
+    document.body.style.backgroundImage = `url(${url})`
+    document.body.style.backgroundPosition = 'center'
+    document.body.style.backgroundSize = 'cover'
+  }
 
   /**
    * Change the app theme
@@ -43,16 +60,18 @@ export const AppThemeContextProvider = (props: ICCP) => {
   }
 
   useEffect(() => {
-    // chnage the page background
-    document.body.style.backgroundColor =
-      currentTheme.palette.background.default
+    if (backgroundPhoto) {
+      // chnage the page background
+      document.body.style.backgroundColor =
+        currentTheme.palette.background.default
+    }
 
     const themeClass =
       currentThemeName === appThemes.dark ? appThemes.dark : appThemes.light
 
     // add or remove the dark class
     document.body.setAttribute('class', themeClass)
-  }, [currentTheme, currentThemeName])
+  }, [backgroundPhoto, currentTheme, currentThemeName])
 
   useEffect(() => {
     // Check if a default theme exists in localStorage
@@ -81,6 +100,10 @@ export const AppThemeContextProvider = (props: ICCP) => {
         mediaQuery.removeEventListener('change', handleChange)
       }
     }
+
+    // Get the background image from local storage
+    setBackgroundFromLocalStorage()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -88,6 +111,7 @@ export const AppThemeContextProvider = (props: ICCP) => {
       value={{
         currentThemeName,
         handleChangeThemeApp,
+        handleChangeBgImage,
       }}
     >
       <ThemeProvider theme={currentTheme}>{props.children}</ThemeProvider>
