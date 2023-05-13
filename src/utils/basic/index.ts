@@ -69,13 +69,17 @@ export const copyToClipboard = (text: string) => {
  * Extracts the video ID from a YouTube URL.
  * @param {string} url - The YouTube URL.
  */
-export const extractYouTubeVideoId = (url: string): { videoId: string, success: boolean } => {
+export const extractYouTubeVideoId = (
+  url: string
+): { videoId: string; success: boolean } => {
   let videoId = ''
   let success = false
 
-  const embedRegex = /^(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/
+  const embedRegex =
+    /^(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/
   const shortUrlRegex = /^(?:https?:\/\/)?youtu\.be\/([a-zA-Z0-9_-]{11})/
-  const watchRegex = /^(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/
+  const watchRegex =
+    /^(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/
 
   const embedMatch = url.match(embedRegex)
   const shortUrlMatch = url.match(shortUrlRegex)
