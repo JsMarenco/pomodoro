@@ -80,14 +80,10 @@ export const AppThemeContextProvider = (props: ICCP) => {
 
     if (storedTheme && storedTheme.value) {
       setCurrentThemeName(storedTheme.value)
-
-      if (!backgroundPhoto) {
-        setCurrentTheme(
-          storedTheme.value === appThemes.dark ? darkTheme : lightTheme
-        )
-      } else {
-        setBackgroundFromLocalStorage()
-      }
+      setCurrentTheme(
+        storedTheme.value === appThemes.dark ? darkTheme : lightTheme
+      )
+      setBackgroundFromLocalStorage()
     } else {
       // Detect user mode
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
