@@ -50,5 +50,4 @@ Please adhere to this project's `code of conduct`.
 ## Authors
 
 - [@andreycalder0n](https://www.github.com/andreycalder0n)
-- [@LuciaNishimiya](https://www.github.com/LuciaNishimiya)
 - [@jsmarenco](https://www.github.com/jsmareno)
