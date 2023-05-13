@@ -11,6 +11,15 @@ const updateBackgroundPhotoReducer: CaseReducer<
 
   const preference = state.isRoom ? roomPreferenceKeys : userPreferenceKeys
 
+  if (!action.payload.trim()) {
+    localStorage.removeItem(preference.backgroundPhoto.key)
+
+    return {
+      ...state,
+      backgroundPhoto: action.payload.trim(),
+    }
+  }
+
   saveInLocalStorage(preference.backgroundPhoto.key, {
     value: action.payload,
   })
