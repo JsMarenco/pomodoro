@@ -1,4 +1,4 @@
-export type PomodoroStatus = 'Pause' | 'Focus' | 'Break' | 'Long break'
+export type PomodoroStatus = 'Focus' | 'Break' | 'Long break'
 
 export interface Room {
   // Room info
