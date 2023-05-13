@@ -60,7 +60,10 @@ export const AppThemeContextProvider = (props: ICCP) => {
   }
 
   useEffect(() => {
-    console.log('🚀 ~ file: AppThemeContext.tsx:64 ~ useEffect ~ backgroundPhoto:', backgroundPhoto)
+    console.log(
+      '🚀 ~ file: AppThemeContext.tsx:64 ~ useEffect ~ backgroundPhoto:',
+      backgroundPhoto
+    )
     if (!backgroundPhoto) {
       // chnage the page background
       document.body.style.backgroundColor =
