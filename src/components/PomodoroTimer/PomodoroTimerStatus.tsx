@@ -44,7 +44,7 @@ export default function PomodoroTimerStatus({
       )}
 
       <Typography variant="body1" color="text.primary">
-        {isPaused ? 'Pause' : status}
+        {status}
       </Typography>
     </Stack>
   )
