@@ -39,4 +39,7 @@ export interface PomodoroTimerState extends Partial<Room> {
 
   // Sounds
   soundsEnabled: boolean
+
+  // Custom
+  backgroundPhoto?: string
 }
