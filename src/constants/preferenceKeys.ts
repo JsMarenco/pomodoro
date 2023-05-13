@@ -14,6 +14,9 @@ const userPreferenceKeys = {
   enableSounds: {
     key: 'userPreference_enableSounds',
   },
+  backgroundPhoto: {
+    key: 'userPreference_backgroundPhoto',
+  },
 }
 
 const roomPreferenceKeys = {
@@ -31,6 +34,9 @@ const roomPreferenceKeys = {
   },
   enableSounds: {
     key: 'roomPreference_enableSounds',
+  },
+  backgroundPhoto: {
+    key: 'roomPreference_backgroundPhoto',
   },
 }
 
