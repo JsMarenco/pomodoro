@@ -28,7 +28,7 @@ const pomodoroUserInitialState = (): PomodoroTimerState => {
   return {
     // Pomodoro State
     isPaused: true,
-    status: 'Pause',
+    status: 'Focus',
 
     // Pomodoro Time
     minutes: focusTimerValue,
