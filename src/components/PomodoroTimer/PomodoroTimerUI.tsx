@@ -25,7 +25,16 @@ export default function PomodoroTimerUI({
   handleLeftRoom,
 }: PomodoroTimerUIProps) {
   return (
-    <Stack spacing={3}>
+    <Stack
+      spacing={3}
+      sx={{
+        borderRadius: 3,
+        py: 2,
+        maxWidth: '700px',
+        mx: 'auto',
+        bgcolor: 'background.paper',
+      }}
+    >
       <PomodoroTimerStatus isPaused={isPaused} status={status} />
 
       <Typography
