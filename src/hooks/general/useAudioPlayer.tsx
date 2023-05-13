@@ -3,7 +3,9 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 const useAudioPlayer = () => {
-  const { soundsEnabled } = useSelector((state: RootState) => state.personalPomodoro)
+  const { soundsEnabled } = useSelector(
+    (state: RootState) => state.personalPomodoro
+  )
 
   const play = (soundUrl: string, volume: number) => {
     if (soundsEnabled && soundUrl) {
@@ -14,7 +16,7 @@ const useAudioPlayer = () => {
   }
 
   return {
-    play
+    play,
   }
 }
 
