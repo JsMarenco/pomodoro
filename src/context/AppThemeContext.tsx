@@ -60,10 +60,6 @@ export const AppThemeContextProvider = (props: ICCP) => {
   }
 
   useEffect(() => {
-    console.log(
-      '🚀 ~ file: AppThemeContext.tsx:64 ~ useEffect ~ backgroundPhoto:',
-      backgroundPhoto
-    )
     if (!backgroundPhoto) {
       // chnage the page background
       document.body.style.backgroundColor =
@@ -84,9 +80,14 @@ export const AppThemeContextProvider = (props: ICCP) => {
 
     if (storedTheme && storedTheme.value) {
       setCurrentThemeName(storedTheme.value)
-      setCurrentTheme(
-        storedTheme.value === appThemes.dark ? darkTheme : lightTheme
-      )
+
+      if (!backgroundPhoto) {
+        setCurrentTheme(
+          storedTheme.value === appThemes.dark ? darkTheme : lightTheme
+        )
+      } else {
+        setBackgroundFromLocalStorage()
+      }
     } else {
       // Detect user mode
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
@@ -101,13 +102,14 @@ export const AppThemeContextProvider = (props: ICCP) => {
 
       mediaQuery.addEventListener('change', handleChange)
 
+      if (backgroundPhoto) {
+        setBackgroundFromLocalStorage()
+      }
+
       return () => {
         mediaQuery.removeEventListener('change', handleChange)
       }
     }
-
-    // Get the background image from local storage
-    setBackgroundFromLocalStorage()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
