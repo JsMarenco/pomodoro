@@ -17,6 +17,7 @@ export interface ICCP {
 export interface IATC {
   handleChangeThemeApp: () => void
   currentThemeName: string
+  handleChangeBgImage: (url: string) => void
 }
 
 /**
