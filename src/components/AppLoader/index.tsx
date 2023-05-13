@@ -11,38 +11,45 @@ export default function AppLoader() {
 
   return (
     <>
-      <Grow in={true} timeout={200}>
-        <Box>
-          <Box
-            sx={{
-              width: '250px',
-              height: '150px',
-              backgroundImage: `url(${
-                currentThemeName === appThemes.light
-                  ? logoLightVersion.src
-                  : logoDarkVersion.src
-              })`,
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              display: 'flex',
-              justifyContent: 'center',
-              backgroundSize: 'contain',
-              mx: 'auto',
-            }}
-          />
+      <Box
+        className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center"
+        sx={{
+          bgcolor: 'background.default',
+        }}
+      >
+        <Grow in={true} timeout={200}>
+          <Box>
+            <Box
+              sx={{
+                width: '250px',
+                height: '150px',
+                backgroundImage: `url(${
+                  currentThemeName === appThemes.light
+                    ? logoLightVersion.src
+                    : logoDarkVersion.src
+                })`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                display: 'flex',
+                justifyContent: 'center',
+                backgroundSize: 'contain',
+                mx: 'auto',
+              }}
+            />
 
-          <Typography
-            variant="subtitle1"
-            color="text.primary"
-            align="center"
-            fontWeight={500}
-            fontSize={22}
-            lineHeight={0.5}
-          >
-            Almost there...
-          </Typography>
-        </Box>
-      </Grow>
+            <Typography
+              variant="subtitle1"
+              color="text.primary"
+              align="center"
+              fontWeight={500}
+              fontSize={22}
+              lineHeight={0.5}
+            >
+              Almost there...
+            </Typography>
+          </Box>
+        </Grow>
+      </Box>
     </>
   )
 }
