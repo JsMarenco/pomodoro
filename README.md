@@ -8,6 +8,7 @@ This is a simple and intuitive Pomodoro Timer application that helps you boost p
 - Easy-to-use interface
 - Customizable timer
 - Ability to save user preferences
+- Option to change the background wallpaper
 
 ## Run Locally
 
