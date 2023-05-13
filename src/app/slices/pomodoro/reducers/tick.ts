@@ -2,62 +2,55 @@ import { CaseReducer } from '@reduxjs/toolkit'
 import { PomodoroTimerState } from '@/ts/interfaces/states/pomodoro'
 
 const tickReducer: CaseReducer<PomodoroTimerState> = (state) => {
-  const {
-    isPaused,
-    seconds,
-    minutes,
-    currentInterval,
-    pomodoroIntervals,
-    status,
-    focusTimeDuration,
-    shortBreakDuration,
-    longBreakDuration,
-  } = state
+  const { isPaused } = state
 
   if (isPaused) {
-    return
+    return { ...state }
   }
 
-  if (seconds === 0) {
-    if (minutes === 0) {
-      if (currentInterval < pomodoroIntervals) {
-        if (status === 'Break') {
-          state.currentInterval = Math.min(
-            currentInterval + 1,
-            pomodoroIntervals
+  let newState = { ...state }
+
+  if (newState.seconds === 0) {
+    if (newState.minutes === 0) {
+      if (newState.currentInterval < newState.pomodoroIntervals) {
+        if (newState.status === 'Break') {
+          newState.currentInterval = Math.min(
+            newState.currentInterval + 1,
+            newState.pomodoroIntervals
           )
 
-          state.minutes = focusTimeDuration
-        } else if (status === 'Focus') {
-          state.minutes = shortBreakDuration
+          newState.minutes = newState.focusTimeDuration
+        } else if (newState.status === 'Focus') {
+          newState.minutes = newState.shortBreakDuration
         }
 
-        state.status = status === 'Focus' ? 'Break' : 'Focus'
-        state.seconds = 0
+        newState.status = newState.status === 'Focus' ? 'Break' : 'Focus'
+        newState.seconds = 0
       } else {
-        state.status = 'Long break'
-        state.minutes = longBreakDuration
-        state.seconds = 0
+        newState.status = 'Long break'
+        newState.minutes = newState.longBreakDuration
+        newState.seconds = 0
       }
     } else {
-      state.minutes -= 1
-      state.seconds = 59
+      newState.minutes -= 1
+      newState.seconds = 59
     }
   } else {
-    state.seconds -= 1
+    newState.seconds -= 1
   }
 
   if (
-    state.status === 'Long break' &&
-    state.minutes === 0 &&
-    state.seconds === 0
+    newState.status === 'Long break' &&
+    newState.minutes === 0 &&
+    newState.seconds === 0
   ) {
-    state.currentInterval = 1
-    state.status = 'Pause'
-    state.minutes = focusTimeDuration
-    state.seconds = 0
-    state.isPaused = true
+    newState.currentInterval = 1
+    newState.minutes = newState.focusTimeDuration
+    newState.seconds = 0
+    newState.isPaused = true
   }
+
+  return newState
 }
 
 export default tickReducer

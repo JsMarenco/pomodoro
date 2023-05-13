@@ -7,8 +7,6 @@ const updatePomodoroIntervalsReducer: CaseReducer<
   PomodoroTimerState,
   PayloadAction<number>
 > = (state, action) => {
-  state.pomodoroIntervals = action.payload
-
   const { userPreferenceKeys, roomPreferenceKeys } = preferenceKeys
 
   const preference = state.isRoom ? roomPreferenceKeys : userPreferenceKeys
@@ -16,6 +14,11 @@ const updatePomodoroIntervalsReducer: CaseReducer<
   saveInLocalStorage(preference.intervalTimer.key, {
     value: action.payload,
   })
+
+  return {
+    ...state,
+    pomodoroIntervals: action.payload,
+  }
 }
 
 export default updatePomodoroIntervalsReducer

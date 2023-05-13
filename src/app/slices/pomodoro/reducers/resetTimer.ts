@@ -2,10 +2,13 @@ import { CaseReducer } from '@reduxjs/toolkit'
 import { PomodoroTimerState } from '@/ts/interfaces/states/pomodoro'
 
 const resetTimerReducer: CaseReducer<PomodoroTimerState> = (state) => {
-  state.isPaused = true
-  state.status = 'Pause'
-  state.minutes = state.focusTimeDuration
-  state.seconds = 0
+  return {
+    ...state,
+    isPaused: true,
+    status: 'Focus',
+    minutes: state.focusTimeDuration,
+    seconds: 0,
+  }
 }
 
 export default resetTimerReducer

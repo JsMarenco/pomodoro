@@ -5,7 +5,10 @@ const updateRoomHostReducer: CaseReducer<
   PomodoroTimerState,
   PayloadAction<PomodoroTimerState['host']>
 > = (state, action) => {
-  state.host = action.payload
+  return {
+    ...state,
+    host: action.payload,
+  }
 }
 
 export default updateRoomHostReducer

@@ -7,8 +7,6 @@ const updateLongBreakDurationReducer: CaseReducer<
   PomodoroTimerState,
   PayloadAction<number>
 > = (state, action) => {
-  state.longBreakDuration = action.payload
-
   const { userPreferenceKeys, roomPreferenceKeys } = preferenceKeys
 
   const preference = state.isRoom ? roomPreferenceKeys : userPreferenceKeys
@@ -16,6 +14,11 @@ const updateLongBreakDurationReducer: CaseReducer<
   saveInLocalStorage(preference.longBreakTimer.key, {
     value: action.payload,
   })
+
+  return {
+    ...state,
+    longBreakDuration: action.payload,
+  }
 }
 
 export default updateLongBreakDurationReducer

@@ -7,8 +7,6 @@ const updateShortBreakDurationReducer: CaseReducer<
   PomodoroTimerState,
   PayloadAction<number>
 > = (state, action) => {
-  state.shortBreakDuration = action.payload
-
   const { userPreferenceKeys, roomPreferenceKeys } = preferenceKeys
 
   const preference = state.isRoom ? roomPreferenceKeys : userPreferenceKeys
@@ -16,6 +14,11 @@ const updateShortBreakDurationReducer: CaseReducer<
   saveInLocalStorage(preference.shortBreakTimer.key, {
     value: action.payload,
   })
+
+  return {
+    ...state,
+    shortBreakDuration: action.payload,
+  }
 }
 
 export default updateShortBreakDurationReducer
