@@ -5,17 +5,13 @@ import { AppThemeContext } from '@/context/AppThemeContext'
 import { appThemes } from '@/themes'
 import {
   Dialog,
-  DialogTitle,
   Stack,
-  Typography,
   IconButton,
   DialogContent,
   Switch,
   Slide,
   Box,
-  TextField,
   InputBase,
-  Divider,
 } from '@mui/material'
 import { TransitionProps } from '@mui/material/transitions'
 import { SettingItem } from './SettingsItem'
@@ -36,6 +32,7 @@ import DialogTitleMenu from '@/components/Custom/DialogTitleMenu'
 import SaveIcon from '@mui/icons-material/Save'
 import { validateUrl } from '@/utils/basic'
 import { AppMessageContext } from '@/context/AppMessageContext'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -58,6 +55,7 @@ export const SettingsMenu: FC<MenuProps> = ({
     shortBreakDuration,
     longBreakDuration,
     soundsEnabled,
+    backgroundPhoto,
   } = useSelector((state: RootState) => state.personalPomodoro)
   const dispatch = useDispatch()
   const [bgUrl, setBgurl] = useState('')
@@ -195,6 +193,23 @@ export const SettingsMenu: FC<MenuProps> = ({
                 </IconButton>
               </Box>
             </SettingItem>
+
+            {backgroundPhoto && (
+              <SettingItem label="Delete background">
+                <IconButton
+                  size="small"
+                  onClick={() => dispatch(updateBackgroundPhoto(''))}
+                >
+                  <DeleteIcon
+                    color={
+                      currentThemeName === appThemes.dark
+                        ? 'primary'
+                        : 'secondary'
+                    }
+                  />
+                </IconButton>
+              </SettingItem>
+            )}
           </Stack>
         </DialogContent>
       </Dialog>
