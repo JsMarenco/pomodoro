@@ -64,3 +64,33 @@ export const copyToClipboard = (text: string) => {
     console.error('Failed to copy text to clipboard:', err)
   }
 }
+
+/**
+ * Extracts the video ID from a YouTube URL.
+ * @param {string} url - The YouTube URL.
+ */
+export const extractYouTubeVideoId = (url: string): { videoId: string, success: boolean } => {
+  let videoId = ''
+  let success = false
+
+  const embedRegex = /^(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/
+  const shortUrlRegex = /^(?:https?:\/\/)?youtu\.be\/([a-zA-Z0-9_-]{11})/
+  const watchRegex = /^(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/
+
+  const embedMatch = url.match(embedRegex)
+  const shortUrlMatch = url.match(shortUrlRegex)
+  const watchMatch = url.match(watchRegex)
+
+  if (embedMatch) {
+    videoId = embedMatch[1]
+    success = true
+  } else if (shortUrlMatch) {
+    videoId = shortUrlMatch[1]
+    success = true
+  } else if (watchMatch) {
+    videoId = watchMatch[1]
+    success = true
+  }
+
+  return { videoId, success }
+}
