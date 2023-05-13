@@ -18,6 +18,8 @@ const updateShortBreakDurationReducer: CaseReducer<
   return {
     ...state,
     shortBreakDuration: action.payload,
+    minutes: state.isPaused ? action.payload : state.minutes,
+    seconds: state.isPaused ? 0 : state.seconds,
   }
 }
 

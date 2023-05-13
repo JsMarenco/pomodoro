@@ -16,6 +16,8 @@ const updateFocusTimeDurationReducer: CaseReducer<
   return {
     ...state,
     focusTimeDuration: action.payload,
+    minutes: state.isPaused ? action.payload : state.minutes,
+    seconds: state.isPaused ? 0 : state.seconds,
   }
 }
 
