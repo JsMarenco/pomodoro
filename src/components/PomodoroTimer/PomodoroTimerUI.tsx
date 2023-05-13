@@ -32,7 +32,7 @@ export default function PomodoroTimerUI({
         py: 2,
         maxWidth: '700px',
         mx: 'auto',
-        bgcolor: 'background.paper',
+        bgcolor: 'background.default',
       }}
     >
       <PomodoroTimerStatus isPaused={isPaused} status={status} />
