@@ -15,6 +15,7 @@ import switchToRoomModeReducer from './reducers/switchToRoomMode'
 import switchToSingleModeReducer from './reducers/switchToSingleMode'
 import updateRoomHostReducer from './reducers/updateRoomHost'
 import switchToSilenceModeReducer from './reducers/switchToSilenceMode'
+import updateBackgroundPhotoReducer from './reducers/updateBackgroundPhoto'
 
 const pomodoroTimerSlice = createSlice({
   name: 'pomodoroTimer',
@@ -35,6 +36,7 @@ const pomodoroTimerSlice = createSlice({
     switchToSingleMode: switchToSingleModeReducer,
     updateRoomHost: updateRoomHostReducer,
     switchToSilenceMode: switchToSilenceModeReducer,
+    updateBackgroundPhoto: updateBackgroundPhotoReducer,
   },
 })
 
@@ -53,6 +55,7 @@ export const {
   createRoom,
   updateRoomHost,
   switchToSilenceMode,
+  updateBackgroundPhoto,
 } = pomodoroTimerSlice.actions
 
 export default pomodoroTimerSlice.reducer
