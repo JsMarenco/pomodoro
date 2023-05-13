@@ -18,4 +18,5 @@
 
 body {
   user-select: none;
+  transition: background-color 0.5s ease, background-image 0.5s ease;
 }
