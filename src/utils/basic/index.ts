@@ -98,3 +98,17 @@ export const extractYouTubeVideoId = (
 
   return { videoId, success }
 }
+
+/**
+ * Validates a URL to check if it is a valid URL.
+ * @param {string} url - The URL string to validate.
+ * @returns {boolean} - True if the URL is valid, false otherwise.
+ */
+export const validateUrl = (url: string): boolean => {
+  try {
+    new URL(url)
+    return true
+  } catch (error) {
+    return false
+  }
+}
