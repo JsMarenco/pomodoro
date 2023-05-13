@@ -13,6 +13,8 @@ import {
 import PomodoroTimerUI from './PomodoroTimerUI'
 import { useRouter } from 'next/router'
 import appRoutes from '@/constants/routes/app'
+import appSounds from '@/constants/sounds'
+import useAudioPlayer from '@/hooks/general/useAudioPlayer'
 
 interface PomodoroTimerProps {
   isPrivateRoom?: boolean
@@ -28,6 +30,7 @@ const PomodoroTimer: FC<PomodoroTimerProps> = ({ isPrivateRoom = false }) => {
     pomodoroIntervals,
     isRoom,
     participants,
+    soundsEnabled,
   } = useSelector((state: RootState) => state.personalPomodoro)
 
   const dispatch = useDispatch()
@@ -35,6 +38,7 @@ const PomodoroTimer: FC<PomodoroTimerProps> = ({ isPrivateRoom = false }) => {
     useState<null | HTMLElement>(null)
   const openMoreOptions = Boolean(anchorElMoreOptions)
   const router = useRouter()
+  const { play } = useAudioPlayer()
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElMoreOptions(event.currentTarget)
@@ -55,6 +59,26 @@ const PomodoroTimer: FC<PomodoroTimerProps> = ({ isPrivateRoom = false }) => {
       }
     }
   }, [isPaused, dispatch])
+
+  useEffect(() => {
+    if (!soundsEnabled) return
+    if (isPaused) return
+
+    if (status === 'Break') {
+      const url = appSounds.break.start.url
+      const volume = appSounds.break.start.volume
+
+      play(url, volume)
+    }
+
+    if (status === 'Focus') {
+      const url = appSounds.pomodoro.start.url
+      const volume = appSounds.pomodoro.start.volume
+
+      play(url, volume)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status])
 
   useEffect(() => {
     if (!isRoom && router.pathname !== '/') {
