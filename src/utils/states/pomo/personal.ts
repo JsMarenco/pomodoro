@@ -25,6 +25,8 @@ const pomodoroUserInitialState = (): PomodoroTimerState => {
 
   const soundsEnabled = getValueFromLocalStorage(user.enableSounds.key, true)
 
+  const backgroundPhoto = getValueFromLocalStorage(user.backgroundPhoto.key, '')
+
   return {
     // Pomodoro State
     isPaused: true,
@@ -46,6 +48,9 @@ const pomodoroUserInitialState = (): PomodoroTimerState => {
 
     // Sounds
     soundsEnabled,
+
+    // Custom
+    backgroundPhoto,
   }
 }
 

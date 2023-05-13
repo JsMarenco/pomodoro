@@ -36,6 +36,8 @@ const pomodoroRoomInitialState = (): PomodoroTimerState => {
 
   const soundsEnabled = getValueFromLocalStorage(room.enableSounds.key, true)
 
+  const backgroundPhoto = getValueFromLocalStorage(room.backgroundPhoto.key, '')
+
   return {
     // Pomodoro State
     isPaused: true,
@@ -59,6 +61,9 @@ const pomodoroRoomInitialState = (): PomodoroTimerState => {
 
     // Sounds
     soundsEnabled,
+
+    // Custom
+    backgroundPhoto,
   }
 }
 
